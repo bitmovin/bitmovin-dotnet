@@ -15,3 +15,6 @@ To install bitmovin-dotnet, run the following command in the Package Manager Con
 
 ##Managing NuGet Packages Using the Dialog
 Detailed information on how to find, install, remove, and update NuGet packages using the Manage NuGet Packages dialog box can be found at [docs.nuget.org](https://docs.nuget.org/consume/package-manager-dialog) 
+
+#Example
+Please go to our [example page](https://github.com/bitmovin/bitmovin-dotnet/tree/master/examples/).
