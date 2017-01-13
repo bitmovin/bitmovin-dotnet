@@ -8,9 +8,13 @@ NuGet is a extension for Visual Studio which allows you to search for, install, 
 NuGet comes installed with the more recent versions of Visual Studio, but you can download it from [here] (https://docs.nuget.org/consume/installing-nuget) if you don’t already have it.
 
 ##Install bitmovin-dotnet via Package Manager Console
-To install bitmovin-dotnet, run the following command in the Package Manager Console:
+To install bitmovin-dotnet, run the following command in the Package Manager Console (.NET Framework 4.0):
 ```
     Install-Package bitmovin-dotnet
+```   
+To install bitmovin-dotnet, run the following command in the Package Manager Console (.NET Core):
+```
+    Install-Package bitmovin-dotnet-core
 ```   
 
 ##Managing NuGet Packages Using the Dialog
