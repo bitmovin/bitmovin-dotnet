@@ -1,9 +1,10 @@
 {
-    "name" : "bitmovin-dotnet",
+    "name" : "bitmovin-dotnet-core",
     "title": "Bitmovin .NET Client",
     "description" : ".NET-Client which enables you to seamlessly integrate the Bitmovin API into your existing projects",
-    "version": "1.0.0-*",
+    "version": "1.0.1-*",
     "copyright": "Bitmovin 2017",
+
     "buildOptions": {
         "debugType": "portable"
     },
