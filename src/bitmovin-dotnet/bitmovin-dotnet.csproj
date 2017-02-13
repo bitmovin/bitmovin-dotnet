@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FFC296B6-7188-49DB-B5CB-2BE335FE7720}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>bitmovin-dotnet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>bitmovin_dotnet_vs2015</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="project.json" />
+    <None Include="project-core.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseObject.cs" />
+    <Compile Include="BitmovinApi.cs" />
+    <Compile Include="Codec\AACAudioConfiguration.cs" />
+    <Compile Include="Codec\AudioConfiguration.cs" />
+    <Compile Include="Codec\CodecConfig.cs" />
+    <Compile Include="Codec\CodecTypeContainer.cs" />
+    <Compile Include="Codec\H264VideoConfiguration.cs" />
+    <Compile Include="Codec\H265VideoConfiguration.cs" />
+    <Compile Include="Codec\VideoConfiguration.cs" />
+    <Compile Include="Constants\ApiUrls.cs" />
+    <Compile Include="Container\CodecContainer.cs" />
+    <Compile Include="Container\EncodingContainer.cs" />
+    <Compile Include="Container\InputContainer.cs" />
+    <Compile Include="Container\ManifestContainer.cs" />
+    <Compile Include="Container\OutputContainer.cs" />
+    <Compile Include="Encoding\Encoding.cs" />
+    <Compile Include="Encoding\Fmp4.cs" />
+    <Compile Include="Encoding\LiveDashManifest.cs" />
+    <Compile Include="Encoding\LiveEncoding.cs" />
+    <Compile Include="Encoding\Mp4.cs" />
+    <Compile Include="Encoding\Muxing.cs" />
+    <Compile Include="Encoding\MuxingStream.cs" />
+    <Compile Include="Encoding\Output.cs" />
+    <Compile Include="Encoding\StartEncodingRequest.cs" />
+    <Compile Include="Encoding\StartLiveEncodingRequest.cs" />
+    <Compile Include="Encoding\Stream.cs" />
+    <Compile Include="Encoding\Ts.cs" />
+    <Compile Include="Enums\AwsCloudRegion.cs" />
+    <Compile Include="Enums\BAdapt.cs" />
+    <Compile Include="Enums\ChannelLayout.cs" />
+    <Compile Include="Enums\CloudRegion.cs" />
+    <Compile Include="Enums\CodecType.cs" />
+    <Compile Include="Enums\EncodingCloudRegion.cs" />
+    <Compile Include="Enums\FtpTransferVersion.cs" />
+    <Compile Include="Enums\GcsCloudRegion.cs" />
+    <Compile Include="Enums\H264Level.cs" />
+    <Compile Include="Enums\H264Profile.cs" />
+    <Compile Include="Enums\H265Level.cs" />
+    <Compile Include="Enums\H265Profile.cs" />
+    <Compile Include="Enums\InputType.cs" />
+    <Compile Include="Enums\ManifestType.cs" />
+    <Compile Include="Enums\MaxCtuSize.cs" />
+    <Compile Include="Enums\MediaType.cs" />
+    <Compile Include="Enums\MotionSearch.cs" />
+    <Compile Include="Enums\MvPredictionMode.cs" />
+    <Compile Include="Enums\OutputType.cs" />
+    <Compile Include="Enums\Permission.cs" />
+    <Compile Include="Enums\Role.cs" />
+    <Compile Include="Enums\SegmentScheme.cs" />
+    <Compile Include="Enums\SelectionMode.cs" />
+    <Compile Include="Enums\Status.cs" />
+    <Compile Include="Enums\TuInterDepth.cs" />
+    <Compile Include="Enums\TuIntraDepth.cs" />
+    <Compile Include="Exception\BitmovinApiException.cs" />
+    <Compile Include="Exception\BitmovinWebExceptionMessage.cs" />
+    <Compile Include="Input\AnalysisDetail.cs" />
+    <Compile Include="Input\AnalysisInput.cs" />
+    <Compile Include="Input\AnalysisStatus.cs" />
+    <Compile Include="Input\AzureInput.cs" />
+    <Compile Include="Input\BaseInput.cs" />
+    <Compile Include="Input\FtpInput.cs" />
+    <Compile Include="Input\GcsInput.cs" />
+    <Compile Include="Input\HttpInput.cs" />
+    <Compile Include="Input\HttpsInput.cs" />
+    <Compile Include="Input\InputTypeContainer.cs" />
+    <Compile Include="Input\RtmpInput.cs" />
+    <Compile Include="Input\S3Input.cs" />
+    <Compile Include="Input\SftpInput.cs" />
+    <Compile Include="Input\StreamDetail.cs" />
+    <Compile Include="Manifest\AdaptationSet.cs" />
+    <Compile Include="Manifest\AudioAdaptationSet.cs" />
+    <Compile Include="Manifest\BaseManifest.cs" />
+    <Compile Include="Manifest\CustomAttribute.cs" />
+    <Compile Include="Manifest\Dash.cs" />
+    <Compile Include="Manifest\Fmp4.cs" />
+    <Compile Include="Manifest\Hls.cs" />
+    <Compile Include="Manifest\MediaInfo.cs" />
+    <Compile Include="Manifest\Period.cs" />
+    <Compile Include="Manifest\StreamInfo.cs" />
+    <Compile Include="Manifest\VideoAdaptationSet.cs" />
+    <Compile Include="Output\AzureOutput.cs" />
+    <Compile Include="Output\BaseOutput.cs" />
+    <Compile Include="Output\BitmovinAws.cs" />
+    <Compile Include="Output\BitmovinGcp.cs" />
+    <Compile Include="Output\FtpOutput.cs" />
+    <Compile Include="Output\GcsOutput.cs" />
+    <Compile Include="Output\OutputTypeContainer.cs" />
+    <Compile Include="Output\S3Output.cs" />
+    <Compile Include="Output\SftpOutput.cs" />
+    <Compile Include="Resource\AbstractFourEmbeddedResource.cs" />
+    <Compile Include="Resource\AbstractListResource.cs" />
+    <Compile Include="Resource\AbstractOneEmbeddedResource.cs" />
+    <Compile Include="Resource\AbstractResource.cs" />
+    <Compile Include="Resource\AbstractThreeEmbeddedResource.cs" />
+    <Compile Include="Resource\AbstractTwoEmbeddedResource.cs" />
+    <Compile Include="Resource\AnalysisResource.cs" />
+    <Compile Include="Resource\CloudOutputResource.cs" />
+    <Compile Include="Resource\DashResource.cs" />
+    <Compile Include="Resource\EncodingResource.cs" />
+    <Compile Include="Resource\HlsResource.cs" />
+    <Compile Include="Resource\InputResource.cs" />
+    <Compile Include="Resource\OutputResource.cs" />
+    <Compile Include="Resource\PeriodResource.cs" />
+    <Compile Include="Resource\RtmpInputResource.cs" />
+    <Compile Include="Resource\StreamResource.cs" />
+    <Compile Include="RestClient.cs" />
+    <Compile Include="Rest\Detail.cs" />
+    <Compile Include="Rest\IdWrapper.cs" />
+    <Compile Include="Rest\Link.cs" />
+    <Compile Include="Rest\Message.cs" />
+    <Compile Include="Rest\MessageType.cs" />
+    <Compile Include="Rest\PaginationResponse.cs" />
+    <Compile Include="Rest\ResponseEnvelope.cs" />
+    <Compile Include="Rest\ResponseStatus.cs" />
+    <Compile Include="Rest\Subtask.cs" />
+    <Compile Include="Rest\Task.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".vs\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true">
+      <UserProperties project-core_1json__JSONSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

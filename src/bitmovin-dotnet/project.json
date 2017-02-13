@@ -1,21 +1,25 @@
 {
-    "name" : "bitmovin-dotnet",
-    "title": "Bitmovin .NET Client",
-    "description" : ".NET-Client which enables you to seamlessly integrate the Bitmovin API into your existing projects",
-    "version": "1.0.1-*",
-    "copyright": "Bitmovin 2017",
+  "name": "bitmovin-dotnet",
+  "title": "Bitmovin .NET Client",
+  "description": ".NET-Client which enables you to seamlessly integrate the Bitmovin API into your existing projects",
+  "version": "1.0.1-*",
+  "copyright": "Bitmovin 2017",
 
-    "buildOptions": {
-        "debugType": "portable"
-    },
-    "dependencies": {
-        "Newtonsoft.Json": "9.0.1"
-    },
-    "frameworks": {
-        "netstandard1.6": {
-            "dependencies": {
-                "NETStandard.Library": "1.6.1"
-            }
-        }
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1"
+  },
+  "frameworks": {
+    "net45": {
+      "dependencies": {
+        "System.Net.Http": "4.3.0"
+      }
     }
+  },
+  "runtimes": {
+    "win": {
+    }
+  }
 }

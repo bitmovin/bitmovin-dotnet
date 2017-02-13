@@ -7,11 +7,13 @@ using com.bitmovin.Api.Enums;
 using com.bitmovin.Api.Input;
 using com.bitmovin.Api.Manifest;
 using com.bitmovin.Api.Output;
-using Xunit;
 using Fmp4 = com.bitmovin.Api.Encoding.Fmp4;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace com.bitmovin.Api.Examples
 {
+
+    [TestClass]
     public class StartLiveStream
     {
         private const string API_KEY = "YOUR API KEY";
@@ -20,7 +22,7 @@ namespace com.bitmovin.Api.Examples
         private const string GCS_BUCKET_NAME = "GCS BUCKET NAME";
         private const string OUTPUT_PATH = "path/to/output/";
 
-        [Fact]
+        [TestMethod]
         public void StartLiveEncoding()
         {
             var bitmovin = new BitmovinApi(API_KEY);

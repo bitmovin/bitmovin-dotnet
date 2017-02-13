@@ -1,13 +1,15 @@
-﻿using Xunit;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace com.bitmovin.Api.Examples
 {
+    [TestClass]
     public class StopLiveStream
     {
         private const string API_KEY = "YOUR API KEY";
         private const string ENCODING_ID = "LIVE-ENCODING-ID";
 
-        [Fact]
+        [TestMethod]
         public void StartLiveEncoding()
         {
             var bitmovin = new BitmovinApi(API_KEY);
