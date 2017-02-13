@@ -69,6 +69,7 @@
     <Compile Include="Container\OutputContainer.cs" />
     <Compile Include="Encoding\Encoding.cs" />
     <Compile Include="Encoding\Fmp4.cs" />
+    <Compile Include="Encoding\LiveHlsManifest.cs" />
     <Compile Include="Encoding\LiveDashManifest.cs" />
     <Compile Include="Encoding\LiveEncoding.cs" />
     <Compile Include="Encoding\Mp4.cs" />

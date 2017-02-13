@@ -10,6 +10,8 @@ namespace com.bitmovin.Api.Manifest
         [JsonConverter(typeof(StringEnumConverter))]
         public MediaType? Type { get; set; }
 
+        public string Name { get; set; }
+
         public string Uri { get; set; }
 
         public string GroupId { get; set; }
@@ -20,7 +22,7 @@ namespace com.bitmovin.Api.Manifest
 
         public bool? IsDefault { get; set; }
 
-        public bool? AutoSelect { get; set; }
+        public bool? Autoselect { get; set; }
 
         public bool? Forced { get; set; }
 

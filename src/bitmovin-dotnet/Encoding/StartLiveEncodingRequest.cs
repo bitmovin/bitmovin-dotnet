@@ -6,5 +6,6 @@ namespace com.bitmovin.Api.Encoding
     {
         public string StreamKey { get; set; }
         public List<LiveDashManifest> DashManifests { get; set; }
+        public List<LiveHlsManifest> HlsManifests { get; set; }
     }
 }

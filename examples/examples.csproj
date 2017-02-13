@@ -52,6 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="StartLiveStreamWithHls.cs" />
     <Compile Include="StartLiveStream.cs" />
     <Compile Include="StopLiveStream.cs" />
   </ItemGroup>
