@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using Newtonsoft.Json;
 
 namespace com.bitmovin.Api.Exception
@@ -12,7 +13,12 @@ namespace com.bitmovin.Api.Exception
             _content = response.Content.ReadAsStringAsync().Result;
         }
 
-        public BitmovinWebExceptionMessage ExceptionMessage
-            => JsonConvert.DeserializeObject<BitmovinWebExceptionMessage>(_content);
+        public BitmovinWebException Exception
+            => JsonConvert.DeserializeObject<BitmovinWebException>(_content);
+
+        public override string ToString()
+        {
+            return String.Format("Exception Message: {0}\r\nRaw Response: {1}", Exception, _content);
+        }
     }
 }

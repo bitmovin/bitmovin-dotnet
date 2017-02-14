@@ -16,9 +16,9 @@ namespace com.bitmovin.Api.Manifest
 
         public string EncodingId { get; set; }
 
-        public string StreamID { get; set; }
+        public string StreamId { get; set; }
 
-        public string MuxingID { get; set; }
+        public string MuxingId { get; set; }
 
         public string DrmID { get; set; }
 
