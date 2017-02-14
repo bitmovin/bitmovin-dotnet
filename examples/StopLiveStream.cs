@@ -10,7 +10,7 @@ namespace com.bitmovin.Api.Examples
         private const string ENCODING_ID = "LIVE-ENCODING-ID";
 
         [TestMethod]
-        public void StartLiveEncoding()
+        public void StopLiveEncoding()
         {
             var bitmovin = new BitmovinApi(API_KEY);
             bitmovin.Encoding.Encoding.StopLive(ENCODING_ID);
