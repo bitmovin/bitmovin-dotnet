@@ -49,7 +49,6 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="project.json" />
-    <None Include="project_core.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseObject.cs" />
