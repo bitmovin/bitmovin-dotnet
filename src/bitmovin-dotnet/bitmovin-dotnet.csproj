@@ -106,7 +106,8 @@
     <Compile Include="Enums\TuInterDepth.cs" />
     <Compile Include="Enums\TuIntraDepth.cs" />
     <Compile Include="Exception\BitmovinApiException.cs" />
-    <Compile Include="Exception\BitmovinWebExceptionMessage.cs" />
+    <Compile Include="Exception\BitmovinWebException.cs" />
+    <Compile Include="Exception\BitmovinWebExceptionData.cs" />
     <Compile Include="Input\AnalysisDetail.cs" />
     <Compile Include="Input\AnalysisInput.cs" />
     <Compile Include="Input\AnalysisStatus.cs" />
