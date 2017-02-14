@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>bitmovin-dotnet</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -49,7 +49,7 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="project.json" />
-    <None Include="project-core.json" />
+    <None Include="project_core.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseObject.cs" />
@@ -174,9 +174,5 @@
     <Folder Include=".vs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
-  <ProjectExtensions>
-    <VisualStudio AllowExistingFolder="true">
-      <UserProperties project-core_1json__JSONSchema="" />
-    </VisualStudio>
-  </ProjectExtensions>
+  <ProjectExtensions />
 </Project>
