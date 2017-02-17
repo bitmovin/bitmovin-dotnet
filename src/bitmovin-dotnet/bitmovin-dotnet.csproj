@@ -85,6 +85,8 @@
     <Compile Include="Enums\CloudRegion.cs" />
     <Compile Include="Enums\CodecType.cs" />
     <Compile Include="Enums\EncodingCloudRegion.cs" />
+    <Compile Include="Enums\EncodingType.cs" />
+    <Compile Include="Enums\EncodingStatus.cs" />
     <Compile Include="Enums\FtpTransferVersion.cs" />
     <Compile Include="Enums\GcsCloudRegion.cs" />
     <Compile Include="Enums\H264Level.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Resource\EncodingResource.cs" />
     <Compile Include="Resource\HlsResource.cs" />
     <Compile Include="Resource\InputResource.cs" />
+    <Compile Include="Resource\CodecResource.cs" />
     <Compile Include="Resource\OutputResource.cs" />
     <Compile Include="Resource\PeriodResource.cs" />
     <Compile Include="Resource\RtmpInputResource.cs" />
