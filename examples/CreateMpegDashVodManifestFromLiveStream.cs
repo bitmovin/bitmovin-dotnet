@@ -11,7 +11,7 @@ namespace com.bitmovin.Api.Examples
 {
 
     [TestClass]
-    public class CreateVodManifestFromLiveStream
+    public class CreateMpegDashVodManifestFromLiveStream
     {
         private const string API_KEY = "YOUR API KEY";
         private const string ENCODING_ID = "ENCODING ID FROM LIVE ENCODING";
