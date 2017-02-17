@@ -15,5 +15,27 @@ namespace com.bitmovin.Api.Resource
             var retrieveUrl = string.Format("{0}/{1}/type", _url, id);
             return _restClient.Get<CodecTypeContainer>(retrieveUrl).Type;
         }
+
+        public bool IsVideoCodec(string id)
+        {
+            switch (RetrieveType(id))
+            {
+                case CodecType.H264:
+                case CodecType.H265:
+                    return true;
+            }
+            return false;
+        }
+
+        public bool IsAudioCodec(string id)
+        {
+            switch (RetrieveType(id))
+            {
+                case CodecType.AAC:
+                    return true;
+            }
+            return false;
+        }
+
     }
 }

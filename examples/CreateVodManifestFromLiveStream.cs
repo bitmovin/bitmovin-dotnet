@@ -19,6 +19,7 @@ namespace com.bitmovin.Api.Examples
         private const string GCS_SECRET_KEY = "GCS SECRET KEY";
         private const string GCS_BUCKET_NAME = "GCS BUCKET NAME";
         private const string OUTPUT_PATH = "path/to/output/";
+        private const string MANIFEST_NAME = "stream_vod.mpd";
 
         // If START_SEGMENT is set to null the first segment is taken as START_SEGMENT
         private readonly int? START_SEGMENT = 2;
@@ -42,20 +43,18 @@ namespace com.bitmovin.Api.Examples
             var audioMuxing = muxings.First(c =>
             {
                 var stream = bitmovin.Encoding.Encoding.Stream.Retrieve(ENCODING_ID, c.Streams.First().StreamId);
-                var configType = bitmovin.Codec.Codec.RetrieveType(stream.CodecConfigId);
-                return configType == CodecType.AAC;
+                return bitmovin.Codec.Codec.IsAudioCodec(stream.CodecConfigId);
             });
             var videoMuxings = muxings.Where(c =>
             {
                 var stream = bitmovin.Encoding.Encoding.Stream.Retrieve(ENCODING_ID, c.Streams.First().StreamId);
-                var configType = bitmovin.Codec.Codec.RetrieveType(stream.CodecConfigId);
-                return configType == CodecType.H264;
+                return bitmovin.Codec.Codec.IsVideoCodec(stream.CodecConfigId);
             }).ToList();
 
             var manifest = bitmovin.Manifest.Dash.Create(new Dash
             {
                 Name = "Dash Manifest",
-                ManifestName = "stream_vod_dotnet_3.mpd",
+                ManifestName = MANIFEST_NAME,
                 Outputs = new List<Encoding.Output>
                 {
                     new Encoding.Output
