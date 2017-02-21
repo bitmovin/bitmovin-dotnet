@@ -137,7 +137,7 @@ namespace com.bitmovin.Api.Examples
             };
             var manifest = bitmovin.Manifest.Dash.Create(new Dash
             {
-                Name = "Manifest",
+                Name = "MPEG-DASH Manifest",
                 ManifestName = "stream.mpd",
                 Outputs = new List<Encoding.Output> {manifestOutput}
             });
@@ -199,12 +199,14 @@ namespace com.bitmovin.Api.Examples
 
             bitmovin.Encoding.Encoding.StartLive(encoding.Id, new StartLiveEncodingRequest
             {
-                StreamKey = "bitcodin",
+                StreamKey = "YourStreamKey",
                 DashManifests = new List<LiveDashManifest>
                 {
                     new LiveDashManifest
                     {
-                        ManifestId = manifest.Id
+                        ManifestId = manifest.Id,
+                        Timeshift = 300,
+                        LiveEdgeOffset = 90
                     }
                 }
             });

@@ -52,6 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CreateHlsVodManifestFromLiveStream.cs" />
     <Compile Include="CreateMpegDashVodManifestFromLiveStream.cs" />
     <Compile Include="StartLiveStreamWithDashAndHls.cs" />
     <Compile Include="StartLiveStreamWithHls.cs" />
