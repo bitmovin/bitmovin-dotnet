@@ -3,7 +3,7 @@
   "authors": ["bitmovin"],
   "title": "Bitmovin .NET Client",
   "description": ".NET-Client which enables you to seamlessly integrate the Bitmovin API into your existing projects",
-  "version": "1.0.3-*",
+  "version": "1.0.4-*",
   "copyright": "Bitmovin 2017",
   "buildOptions": {
     "debugType": "portable"
