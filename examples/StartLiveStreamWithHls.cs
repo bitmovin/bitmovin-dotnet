@@ -136,7 +136,7 @@ namespace com.bitmovin.Api.Examples
             };
             var manifest = bitmovin.Manifest.Hls.Create(new Hls
             {
-                Name = "stream.m3u8",
+                Name = "HLS Manifest",
                 ManifestName = "stream.m3u8",
                 Outputs = new List<Encoding.Output> {manifestOutput}
             });
@@ -144,7 +144,7 @@ namespace com.bitmovin.Api.Examples
             var mediaInfo = new MediaInfo
             {
                 GroupId = "audio",
-                Name = "audio.m3u8",
+                Name = "English",
                 Uri = "audio.m3u8",
                 Type = MediaType.AUDIO,
                 SegmentPath = "audio/128kbps/",
@@ -155,8 +155,7 @@ namespace com.bitmovin.Api.Examples
                 AssocLanguage = "en",
                 Autoselect = false,
                 IsDefault = false,
-                Forced = false,
-                Characteristics = new List<string> { "public.accessibility.describes-audio" }
+                Forced = false
             };
 
             bitmovin.Manifest.Hls.AddMediaInfo(manifest.Id, mediaInfo);
@@ -209,12 +208,13 @@ namespace com.bitmovin.Api.Examples
 
             bitmovin.Encoding.Encoding.StartLive(encoding.Id, new StartLiveEncodingRequest
             {
-                StreamKey = "bitcodin",
+                StreamKey = "YourStreamKey",
                 HlsManifests = new List<LiveHlsManifest>
                 {
                     new LiveHlsManifest
                     {
-                        ManifestId = manifest.Id
+                        ManifestId = manifest.Id,
+                        Timeshift = 300
                     }
                 }
             });
