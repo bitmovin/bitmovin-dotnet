@@ -16,6 +16,7 @@ namespace com.bitmovin.Api.Examples
     [TestClass]
     public class StartLiveStreamWithDashAndHls
     {
+
         private const string API_KEY = "YOUR API KEY";
         private const string GCS_ACCESS_KEY = "GCS ACCESS KEY";
         private const string GCS_SECRET_KEY = "GCS SECRET KEY";
@@ -120,6 +121,21 @@ namespace com.bitmovin.Api.Examples
                 CreateStream(rtmpInput, "/", 1, audioConfig, SelectionMode.AUTO));
 
 
+            // Create FMP4 Muxing for DASH
+            var videoFMP4Muxing240p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream240p, output, OUTPUT_PATH + "video/240p_dash", segmentLength));
+            var videoFMP4Muxing360p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream360p, output, OUTPUT_PATH + "video/360p_dash", segmentLength));
+            var videoFMP4Muxing480p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream480p, output, OUTPUT_PATH + "video/480p_dash", segmentLength));
+            var videoFMP4Muxing720p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream720p, output, OUTPUT_PATH + "video/720p_dash", segmentLength));
+            var videoFMP4Muxing1080p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream1080p, output, OUTPUT_PATH + "video/1080p_dash", segmentLength));
+            var audioFMP4Muxing = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(audioStream, output, OUTPUT_PATH + "audio/128kbps_dash", segmentLength));
+
+
             // Create TS Muxings for HLS
             var videoTsMuxing240p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(videoStream240p, output, OUTPUT_PATH + "video/240p_hls", segmentLength));
@@ -146,7 +162,7 @@ namespace com.bitmovin.Api.Examples
             // Create HLS Manifest
             var manifestHls = bitmovin.Manifest.Hls.Create(new Hls
             {
-                Name = "stream.m3u8",
+                Name = "HLS Manifest",
                 ManifestName = "stream.m3u8",
                 Outputs = new List<Encoding.Output> {manifestOutput}
             });
@@ -154,7 +170,7 @@ namespace com.bitmovin.Api.Examples
             var mediaInfo = new MediaInfo
             {
                 GroupId = "audio",
-                Name = "audio.m3u8",
+                Name = "English",
                 Uri = "audio.m3u8",
                 Type = MediaType.AUDIO,
                 SegmentPath = "audio/128kbps_hls/",
@@ -165,8 +181,7 @@ namespace com.bitmovin.Api.Examples
                 AssocLanguage = "en",
                 Autoselect = false,
                 IsDefault = false,
-                Forced = false,
-                Characteristics = new List<string> { "public.accessibility.describes-audio" }
+                Forced = false
             };
 
             bitmovin.Manifest.Hls.AddMediaInfo(manifestHls.Id, mediaInfo);
@@ -217,26 +232,10 @@ namespace com.bitmovin.Api.Examples
                 SegmentPath = "video/1080p_hls/"
             });
 
-
-
-            // Create FMP4 Muxing for DASH
-            var videoFMP4Muxing240p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream240p, output, OUTPUT_PATH + "video/240p_dash", segmentLength));
-            var videoFMP4Muxing360p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream360p, output, OUTPUT_PATH + "video/360p_dash", segmentLength));
-            var videoFMP4Muxing480p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream480p, output, OUTPUT_PATH + "video/480p_dash", segmentLength));
-            var videoFMP4Muxing720p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream720p, output, OUTPUT_PATH + "video/720p_dash", segmentLength));
-            var videoFMP4Muxing1080p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream1080p, output, OUTPUT_PATH + "video/1080p_dash", segmentLength));
-            var audioFMP4Muxing = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(audioStream, output, OUTPUT_PATH + "audio/128kbps_dash", segmentLength));
-
             // Create DASH Manifest
             var manifestDash = bitmovin.Manifest.Dash.Create(new Dash
             {
-                Name = "Manifest",
+                Name = "MPEG-DASH Manifest",
                 ManifestName = "stream.mpd",
                 Outputs = new List<Encoding.Output> { manifestOutput }
             });
@@ -300,19 +299,22 @@ namespace com.bitmovin.Api.Examples
             // Start encoding
             bitmovin.Encoding.Encoding.StartLive(encoding.Id, new StartLiveEncodingRequest
             {
-                StreamKey = "bitcodin",
+                StreamKey = "YourStreamKey",
                 HlsManifests = new List<LiveHlsManifest>
                 {
                     new LiveHlsManifest
                     {
-                        ManifestId = manifestHls.Id
+                        ManifestId = manifestHls.Id,
+                        Timeshift = 300
                     }
                 },
                 DashManifests = new List<LiveDashManifest>
                 {
                     new LiveDashManifest
                     {
-                        ManifestId = manifestDash.Id
+                        ManifestId = manifestDash.Id,
+                        Timeshift = 300,
+                        LiveEdgeOffset = 90
                     }
                 }
             });
