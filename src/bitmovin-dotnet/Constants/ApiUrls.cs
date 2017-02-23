@@ -182,5 +182,8 @@
         public const string PlayerLicenseKeys = "player/licenses/{playerLicenseId}";
         public const string AnalyticsLicenseKeys = "analytics/licenses/{analyticsLicenseId}";
         public const string AnalyticsQuery = "analytics/queries";
+
+        public const string StatisticsLiveEncdoing = "encoding/statistics/encodings/{encoding_id}/live-statistics";
+
     }
 }
