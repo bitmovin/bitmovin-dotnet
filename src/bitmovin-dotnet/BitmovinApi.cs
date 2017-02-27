@@ -20,6 +20,8 @@ namespace com.bitmovin.Api
 
         public ManifestContainer Manifest;
 
+        public StatisticContainer Statistic;
+
         // Containers go here
 
         public BitmovinApi(string apiKey, string apiUrl = "https://api.bitmovin.com/v1/")
@@ -33,6 +35,7 @@ namespace com.bitmovin.Api
             this.Codec = new CodecContainer(_restClient);
             this.Encoding = new EncodingContainer(_restClient);
             this.Manifest = new ManifestContainer(_restClient);
+            this.Statistic = new StatisticContainer(_restClient);
         }
     }
 }
