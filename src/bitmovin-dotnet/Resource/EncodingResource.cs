@@ -38,6 +38,11 @@ namespace com.bitmovin.Api.Resource
             return _restClient.PostAndGetId<StartEncodingRequest>(postUrl, s);
         }
 
+        public string Start(string id)
+        {
+            return Start(id, new StartEncodingRequest());
+        }
+
         public string Stop(string id)
         {
             var postUrl = string.Format("{0}/{1}/stop", _url, id);
