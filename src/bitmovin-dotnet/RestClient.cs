@@ -26,7 +26,7 @@ namespace com.bitmovin.Api
             _client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
             _client.DefaultRequestHeaders.TryAddWithoutValidation("X-Api-Key", _apiKey);
             _client.DefaultRequestHeaders.TryAddWithoutValidation("X-Api-Client", "bitmovin-dotnet");
-            _client.DefaultRequestHeaders.TryAddWithoutValidation("X-Api-Client-Version", "1.0.5");
+            _client.DefaultRequestHeaders.TryAddWithoutValidation("X-Api-Client-Version", "1.0.6");
 
             _serializer = new JsonSerializer
             {
