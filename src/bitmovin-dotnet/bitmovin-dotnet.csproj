@@ -58,6 +58,7 @@
     <Compile Include="Codec\CodecConfig.cs" />
     <Compile Include="Codec\CodecTypeContainer.cs" />
     <Compile Include="Codec\H264VideoConfiguration.cs" />
+    <Compile Include="Codec\VP9VideoConfiguration.cs" />
     <Compile Include="Codec\H265VideoConfiguration.cs" />
     <Compile Include="Codec\VideoConfiguration.cs" />
     <Compile Include="Constants\ApiUrls.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Container\ManifestContainer.cs" />
     <Compile Include="Container\OutputContainer.cs" />
     <Compile Include="Encoding\Encoding.cs" />
+    <Compile Include="Encoding\Webm.cs" />
     <Compile Include="Encoding\Fmp4.cs" />
     <Compile Include="Encoding\LiveHlsManifest.cs" />
     <Compile Include="Encoding\LiveDashManifest.cs" />
@@ -91,6 +93,9 @@
     <Compile Include="Enums\FtpTransferVersion.cs" />
     <Compile Include="Enums\GcsCloudRegion.cs" />
     <Compile Include="Enums\H264Level.cs" />
+    <Compile Include="Enums\VP9ArnrType.cs" />
+    <Compile Include="Enums\VP9AqMode.cs" />
+    <Compile Include="Enums\VP9Quality.cs" />
     <Compile Include="Enums\H264Profile.cs" />
     <Compile Include="Enums\H265Level.cs" />
     <Compile Include="Enums\H265Profile.cs" />
@@ -130,6 +135,7 @@
     <Compile Include="Manifest\BaseManifest.cs" />
     <Compile Include="Manifest\CustomAttribute.cs" />
     <Compile Include="Manifest\Dash.cs" />
+    <Compile Include="Manifest\Webm.cs" />
     <Compile Include="Manifest\Fmp4.cs" />
     <Compile Include="Manifest\Hls.cs" />
     <Compile Include="Manifest\MediaInfo.cs" />
