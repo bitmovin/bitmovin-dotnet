@@ -12,6 +12,7 @@ namespace com.bitmovin.Api.Resource
         public AbstractTwoEmbeddedResource<AudioAdaptationSet> SubtitleAdaptationSet;
         public AbstractTwoEmbeddedResource<VideoAdaptationSet> CustomAdaptationSet;
         public AbstractThreeEmbeddedResource<Fmp4> Fmp4;
+        public AbstractThreeEmbeddedResource<Webm> Webm;
 
         public DashResource(RestClient client, string url) : base(client, url)
         {
@@ -26,7 +27,8 @@ namespace com.bitmovin.Api.Resource
             this.CustomAdaptationSet =
                 new AbstractTwoEmbeddedResource<VideoAdaptationSet>(client, ApiUrls.ManifestDashAddCustomAdaptionSet);
 
-            this.Fmp4 = new AbstractThreeEmbeddedResource<Fmp4>(client, ApiUrls.ManifestDashAddRepresentation);
+            this.Fmp4 = new AbstractThreeEmbeddedResource<Fmp4>(client, ApiUrls.ManifestDashAddRepresentationFmp4);
+            this.Webm = new AbstractThreeEmbeddedResource<Webm>(client, ApiUrls.ManifestDashAddRepresentationWebm);
 
         }
 
