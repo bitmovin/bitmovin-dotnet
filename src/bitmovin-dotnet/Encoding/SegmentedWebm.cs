@@ -1,6 +1,6 @@
 namespace com.bitmovin.Api.Encoding
 {
-    public class Webm : Muxing
+    public class SegmentedWebm : Muxing
     {
         public double? SegmentLength { get; set; }
 
