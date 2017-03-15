@@ -11,7 +11,7 @@ namespace com.bitmovin.Api.Resource
         public AbstractOneEmbeddedResource<Fmp4> Fmp4 { get; private set; }
         public AbstractOneEmbeddedResource<Ts> Ts { get; private set; }
         public AbstractOneEmbeddedResource<Mp4> Mp4 { get; private set; }
-        public AbstractOneEmbeddedResource<Webm> Webm { get; private set; }
+        public AbstractOneEmbeddedResource<SegmentedWebm> SegmentedWebm { get; private set; }
 
         public EncodingResource(RestClient client, string url) : base(client, url)
         {
@@ -19,7 +19,7 @@ namespace com.bitmovin.Api.Resource
             this.Fmp4 = new AbstractOneEmbeddedResource<Fmp4>(client, ApiUrls.FMP4Muxings);
             this.Ts = new AbstractOneEmbeddedResource<Ts>(client, ApiUrls.TSMuxings);
             this.Mp4 = new AbstractOneEmbeddedResource<Mp4>(client, ApiUrls.MP4Muxings);
-            this.Webm = new AbstractOneEmbeddedResource<Webm>(client, ApiUrls.WebmMuxings);
+            this.SegmentedWebm = new AbstractOneEmbeddedResource<SegmentedWebm>(client, ApiUrls.WebmMuxings);
         }
 
         public T RetrieveDetails(string id)

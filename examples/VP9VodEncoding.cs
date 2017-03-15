@@ -9,7 +9,6 @@ using com.bitmovin.Api.Manifest;
 using com.bitmovin.Api.Output;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Fmp4 = com.bitmovin.Api.Encoding.Fmp4;
-using Webm = com.bitmovin.Api.Encoding.Webm;
 
 namespace com.bitmovin.Api.Examples
 {
@@ -125,16 +124,16 @@ namespace com.bitmovin.Api.Examples
 
 
             // Create Muxing for DASH
-            var videoWebmMuxing240p = bitmovin.Encoding.Encoding.Webm.Create(encoding.Id,
-                CreateWebmMuxing(videoStream240p, output, OUTPUT_PATH + "video/240p", segmentLength));
-            var videoWebmMuxing360p = bitmovin.Encoding.Encoding.Webm.Create(encoding.Id,
-                CreateWebmMuxing(videoStream360p, output, OUTPUT_PATH + "video/360p", segmentLength));
-            var videoWebmMuxing480p = bitmovin.Encoding.Encoding.Webm.Create(encoding.Id,
-                CreateWebmMuxing(videoStream480p, output, OUTPUT_PATH + "video/480p", segmentLength));
-            var videoWebmMuxing720p = bitmovin.Encoding.Encoding.Webm.Create(encoding.Id,
-                CreateWebmMuxing(videoStream720p, output, OUTPUT_PATH + "video/720p", segmentLength));
-            var videoWebmMuxing1080p = bitmovin.Encoding.Encoding.Webm.Create(encoding.Id,
-                CreateWebmMuxing(videoStream1080p, output, OUTPUT_PATH + "video/1080p", segmentLength));
+            var videoWebmMuxing240p = bitmovin.Encoding.Encoding.SegmentedWebm.Create(encoding.Id,
+                CreateSegmentedWebmMuxing(videoStream240p, output, OUTPUT_PATH + "video/240p", segmentLength));
+            var videoWebmMuxing360p = bitmovin.Encoding.Encoding.SegmentedWebm.Create(encoding.Id,
+                CreateSegmentedWebmMuxing(videoStream360p, output, OUTPUT_PATH + "video/360p", segmentLength));
+            var videoWebmMuxing480p = bitmovin.Encoding.Encoding.SegmentedWebm.Create(encoding.Id,
+                CreateSegmentedWebmMuxing(videoStream480p, output, OUTPUT_PATH + "video/480p", segmentLength));
+            var videoWebmMuxing720p = bitmovin.Encoding.Encoding.SegmentedWebm.Create(encoding.Id,
+                CreateSegmentedWebmMuxing(videoStream720p, output, OUTPUT_PATH + "video/720p", segmentLength));
+            var videoWebmMuxing1080p = bitmovin.Encoding.Encoding.SegmentedWebm.Create(encoding.Id,
+                CreateSegmentedWebmMuxing(videoStream1080p, output, OUTPUT_PATH + "video/1080p", segmentLength));
             var audioFMP4Muxing = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
                 CreateFMP4Muxing(audioStream, output, OUTPUT_PATH + "audio/128kbps", segmentLength));
             
@@ -247,7 +246,7 @@ namespace com.bitmovin.Api.Examples
             Console.WriteLine("Encoding finished successfully");
         }
 
-        private static Webm CreateWebmMuxing(Stream stream, BaseOutput output, string outputPath,
+        private static SegmentedWebm CreateSegmentedWebmMuxing(Stream stream, BaseOutput output, string outputPath,
             double? segmentLength)
         {
             var encodingOutput = new Encoding.Output
@@ -257,7 +256,7 @@ namespace com.bitmovin.Api.Examples
                 Acl = new List<Acl> { new Acl { Permission = Permission.PUBLIC_READ } }
             };
 
-            var muxing = new Webm
+            var muxing = new SegmentedWebm
             {
                 Outputs = new List<Encoding.Output> { encodingOutput },
                 Streams = new List<MuxingStream> { new MuxingStream { StreamId = stream.Id } },
