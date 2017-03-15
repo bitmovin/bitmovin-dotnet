@@ -69,7 +69,7 @@
     <Compile Include="Container\ManifestContainer.cs" />
     <Compile Include="Container\OutputContainer.cs" />
     <Compile Include="Encoding\Encoding.cs" />
-    <Compile Include="Encoding\Webm.cs" />
+    <Compile Include="Encoding\SegmentedWebm.cs" />
     <Compile Include="Encoding\Fmp4.cs" />
     <Compile Include="Encoding\LiveHlsManifest.cs" />
     <Compile Include="Encoding\LiveDashManifest.cs" />
