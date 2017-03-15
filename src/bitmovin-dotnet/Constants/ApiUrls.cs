@@ -35,6 +35,7 @@
         public const string CodecConfigLimitOffset = "encoding/configurations?offset={offset}&limit={limit}";
         public const string CodecConfigH264 = "encoding/configurations/video/h264";
         public const string CodecConfigH265 = "encoding/configurations/video/h265";
+        public const string CodecConfigVP9 = "encoding/configurations/video/vp9";
         public const string CodecConfigAac = "encoding/configurations/audio/aac";
 
         public const string Encodings = "encoding/encodings/";
@@ -47,6 +48,7 @@
         public const string FMP4Muxings = "encoding/encodings/{0}/muxings/fmp4";
         public const string TSMuxings = "encoding/encodings/{0}/muxings/ts";
         public const string MP4Muxings = "encoding/encodings/{0}/muxings/mp4";
+        public const string WebmMuxings = "encoding/encodings/{0}/muxings/webm";
 
         public const string WidevineDrms = "encoding/encodings/{encoding_id}/muxings/fmp4/{muxing_id}/drm/widevine";
         public const string PlayReadyDrms = "encoding/encodings/{encoding_id}/muxings/fmp4/{muxing_id}/drm/playready";
@@ -121,8 +123,11 @@
         public const string ManifestDashAddCustomAdaptionSet =
             "encoding/manifests/dash/{0}/periods/{1}/adaptationsets/custom";
 
-        public const string ManifestDashAddRepresentation =
+        public const string ManifestDashAddRepresentationFmp4 =
             "encoding/manifests/dash/{0}/periods/{1}/adaptationsets/{2}/representations/fmp4";
+
+        public const string ManifestDashAddRepresentationWebm =
+            "encoding/manifests/dash/{0}/periods/{1}/adaptationsets/{2}/representations/webm";
 
         public const string ManifestDashAddContentProtectionToAdaptationSet =
             "encoding/manifests/dash/{manifestId}/periods/{periodId}/adaptationsets/{adaptionsetId}/contentprotection";
