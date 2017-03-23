@@ -22,6 +22,21 @@
       },
       "dependencies": {
         "Microsoft.Net.Http": "2.2.29"
+      },
+      "buildOptions": {
+        "define": [ "NET_40" ]
+      }
+    },
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0",
+        "System.Numerics": "4.0.0",
+        "System.Runtime.Serialization": "4.0.0",
+        "System.Xml": "4.0.0",
+        "System.Xml.Linq": "4.0.0"
+      },
+      "dependencies": {
+        "Microsoft.Net.Http": "2.2.29"
       }
     },
     "netstandard1.6": {

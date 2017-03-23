@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace com.bitmovin.Api.Resource
 {
@@ -13,6 +14,54 @@ namespace com.bitmovin.Api.Resource
             this._restClient = client;
             this._url = url;
         }
+
+#if !NET_40
+
+        public async Task<List<T>> RetrieveListAsync(string id, string sub_id, string sub_sub_id, string sub_sub_sub_id, int offset,
+            int limit)
+        {
+            var retrieveUrl = string.Format(_url + "?offset={4}&limit={5}", id, sub_id, sub_sub_id, sub_sub_sub_id,
+                offset, limit);
+            return await _restClient.GetListAsync<T>(retrieveUrl);
+        }
+
+        public async Task<List<T>> RetrieveAllIterativeAsync(string id, string sub_id, string sub_sub_id, string sub_sub_sub_id,
+            int offset, int limit)
+        {
+            var retrieveUrl = string.Format(_url + "?offset={4}&limit={5}", id, sub_id, sub_sub_id, sub_sub_sub_id,
+                offset, limit);
+            return await _restClient.GetAllIterativeAsync<T>(retrieveUrl);
+        }
+
+        public async Task<T> CreateAsync(string id, string sub_id, string sub_sub_id, string sub_sub_sub_id, T item)
+        {
+            var postUrl = string.Format(_url, id, sub_id, sub_sub_id, sub_sub_sub_id);
+            return await _restClient.PostAsync<T>(postUrl, item);
+        }
+
+        public async Task<T> RetrieveAsync(string id, string sub_id, string sub_sub_id, string sub_sub_sub_id, string sub_sub_sub_sub_id)
+        {
+            var retrieveUrl = string.Format(_url + "/{4}", id, sub_id, sub_sub_id, sub_sub_sub_id,
+                sub_sub_sub_sub_id);
+            return await _restClient.GetAsync<T>(retrieveUrl);
+        }
+
+        public async Task<Dictionary<string, object>> RetrieveCustomDataAsync(string id, string sub_id, string sub_sub_id,
+            string sub_sub_sub_id, string sub_sub_sub_sub_id)
+        {
+            var retrieveUrl = string.Format(_url + "/{4}/customData", id, sub_id, sub_sub_id, sub_sub_sub_id,
+                sub_sub_sub_sub_id);
+            return await _restClient.GetCustomDataAsync(retrieveUrl);
+        }
+
+        public async Task DeleteAsync(string id, string sub_id, string sub_sub_id, string sub_sub_sub_id,
+            string sub_sub_sub_sub_id)
+        {
+            var deleteUrl = string.Format(_url + "/{4}", id, sub_id, sub_sub_id, sub_sub_sub_id, sub_sub_sub_sub_id);
+            await _restClient.DeleteAsync(deleteUrl);
+        }
+
+#endif
 
         public List<T> RetrieveList(string id, string sub_id, string sub_sub_id, string sub_sub_sub_id, int offset,
             int limit)
@@ -56,7 +105,6 @@ namespace com.bitmovin.Api.Resource
         {
             var deleteUrl = string.Format(_url + "/{4}", id, sub_id, sub_sub_id, sub_sub_sub_id, sub_sub_sub_sub_id);
             _restClient.Delete(deleteUrl);
-            return;
         }
     }
 }
