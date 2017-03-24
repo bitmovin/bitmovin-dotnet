@@ -1,6 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using com.bitmovin.Api.Constants;
 using com.bitmovin.Api.Encoding;
+using com.bitmovin.Api.Enums;
 using Task = com.bitmovin.Api.Rest.Task;
 
 namespace com.bitmovin.Api.Resource
@@ -25,6 +29,18 @@ namespace com.bitmovin.Api.Resource
 
 #if !NET_40
 
+        public async Task<List<T>> RetrieveListWithStatusAsync(IEnumerable<Status> status, int offset = 0, int limit = 100)
+        {
+            var retrieveUrl = string.Format("{0}?status={1}&offset={2}&limit={3}", _url, string.Join(",", status.Select(c => c.ToString())), offset, limit);
+            return await _restClient.GetListAsync<T>(retrieveUrl);
+        }
+
+        public async Task<List<T>> RetrieveListWithStatusAsync(Status status, int offset = 0, int limit = 100)
+        {
+            var retrieveUrl = string.Format("{0}?status={1}&offset={2}&limit={3}", _url, status, offset, limit);
+            return await _restClient.GetListAsync<T>(retrieveUrl);
+        }
+   
         public async Task<T> RetrieveDetailsAsync(string id)
         {
             var retrieveUrl = string.Format("{0}/{1}", _url, id);
@@ -73,6 +89,18 @@ namespace com.bitmovin.Api.Resource
         }
 
 #endif
+
+        public List<T> RetrieveListWithStatus(IEnumerable<Status> status, int offset = 0, int limit = 100)
+        {
+            var retrieveUrl = string.Format("{0}?status={1}&offset={2}&limit={3}", _url, string.Join(",", status.Select(c => c.ToString())), offset, limit);
+            return _restClient.GetList<T>(retrieveUrl);
+        }
+  
+        public List<T> RetrieveListWithStatus(Status status, int offset = 0, int limit = 100)
+        {
+            var retrieveUrl = string.Format("{0}?status={1}&offset={2}&limit={3}", _url, status, offset, limit);
+            return _restClient.GetList<T>(retrieveUrl);
+        }
 
         public T RetrieveDetails(string id)
         {

@@ -26,6 +26,7 @@ namespace com.bitmovin.Api.Enums
         ASIA,
         AUSTRALIA,
         AWS,
-        GOOGLE
+        GOOGLE,
+        KUBERNETES
     }
 }
