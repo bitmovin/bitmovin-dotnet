@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using com.bitmovin.Api.Manifest;
-using Task = com.bitmovin.Api.Rest.Task;
 
 namespace com.bitmovin.Api.Resource
 {
@@ -36,10 +35,10 @@ namespace com.bitmovin.Api.Resource
             return await _restClient.PostAndGetIdAsync(postUrl);
         }
 
-        public async Task<Task> RetrieveStatusAsync(string id)
+        public async Task<Rest.Task> RetrieveStatusAsync(string id)
         {
             var retrieveUrl = string.Format("{0}/{1}/status", _url, id);
-            return await _restClient.GetAsync<Task>(retrieveUrl);
+            return await _restClient.GetAsync<Rest.Task>(retrieveUrl);
         }
 
 #endif 
@@ -68,10 +67,10 @@ namespace com.bitmovin.Api.Resource
             return _restClient.PostAndGetId(postUrl);
         }
 
-        public Task RetrieveStatus(string id)
+        public Rest.Task RetrieveStatus(string id)
         {
             var retrieveUrl = string.Format("{0}/{1}/status", _url, id);
-            return _restClient.Get<Task>(retrieveUrl);
+            return _restClient.Get<Rest.Task>(retrieveUrl);
         }
     }
 }
