@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>bitmovin-dotnet</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -92,7 +92,12 @@
     <Compile Include="Enums\EncodingStatus.cs" />
     <Compile Include="Enums\FtpTransferVersion.cs" />
     <Compile Include="Enums\GcsCloudRegion.cs" />
+    <Compile Include="Enums\H264Trellis.cs" />
     <Compile Include="Enums\H264Level.cs" />
+    <Compile Include="Enums\H264InterlaceMode.cs" />
+    <Compile Include="Enums\H264Partition.cs" />
+    <Compile Include="Enums\H264SubMe.cs" />
+    <Compile Include="Enums\H264MotionEstimationMethod.cs" />
     <Compile Include="Enums\VP9ArnrType.cs" />
     <Compile Include="Enums\VP9AqMode.cs" />
     <Compile Include="Enums\VP9Quality.cs" />

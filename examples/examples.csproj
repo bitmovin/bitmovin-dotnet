@@ -61,6 +61,8 @@
     <Compile Include="EncodingWithFtpInputAndFtpOutput.cs" />
     <Compile Include="GetLiveStreamStatistics.cs" />
     <Compile Include="EncodingWithS3InputAndFtpOutput.cs" />
+    <Compile Include="H264WithPresetFast.cs" />
+    <Compile Include="GetRunningEncodings.cs" />
     <Compile Include="VP9LiveEncoding.cs" />
     <Compile Include="VP9VodEncoding.cs" />
     <Compile Include="StartSimpleVodEncodingWithDashAndHls.cs" />

@@ -1,6 +1,7 @@
+using System.Threading.Tasks;
 using com.bitmovin.Api.Constants;
 using com.bitmovin.Api.Manifest;
-using com.bitmovin.Api.Rest;
+using Task = com.bitmovin.Api.Rest.Task;
 
 namespace com.bitmovin.Api.Resource
 {
@@ -31,6 +32,28 @@ namespace com.bitmovin.Api.Resource
             this.Webm = new AbstractThreeEmbeddedResource<Webm>(client, ApiUrls.ManifestDashAddRepresentationWebm);
 
         }
+
+#if !NET_40
+
+        public async Task<string> StartAsync(string id)
+        {
+            var postUrl = string.Format("{0}/{1}/start", _url, id);
+            return await _restClient.PostAndGetIdAsync(postUrl);
+        }
+
+        public async Task<string> StopAsync(string id)
+        {
+            var postUrl = string.Format("{0}/{1}/stop", _url, id);
+            return await _restClient.PostAndGetIdAsync(postUrl);
+        }
+
+        public async Task<Task> RetrieveStatusAsync(string id)
+        {
+            var retrieveUrl = string.Format("{0}/{1}/status", _url, id);
+            return await _restClient.GetAsync<Task>(retrieveUrl);
+        }
+        
+#endif
 
         public string Start(string id)
         {
