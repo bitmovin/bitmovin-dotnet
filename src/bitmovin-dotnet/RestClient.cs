@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using com.bitmovin.Api.Exception;
 using com.bitmovin.Api.Rest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using Task = System.Threading.Tasks.Task;
 
 namespace com.bitmovin.Api
 {
@@ -26,7 +28,7 @@ namespace com.bitmovin.Api
             _client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
             _client.DefaultRequestHeaders.TryAddWithoutValidation("X-Api-Key", _apiKey);
             _client.DefaultRequestHeaders.TryAddWithoutValidation("X-Api-Client", "bitmovin-dotnet");
-            _client.DefaultRequestHeaders.TryAddWithoutValidation("X-Api-Client-Version", "1.0.8");
+            _client.DefaultRequestHeaders.TryAddWithoutValidation("X-Api-Client-Version", "1.0.9");
 
             _serializer = new JsonSerializer
             {
@@ -34,6 +36,123 @@ namespace com.bitmovin.Api
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
         }
+
+#if !NET_40
+        public async Task<T> PostAsync<T>(string url, T jsonObject)
+        {
+            var uri = new Uri(_apiUrl, url);
+            var json = JObject.FromObject(jsonObject, _serializer).ToString();
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync(uri, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new BitmovinApiException(response);
+            }
+            var result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<ResponseEnvelope<T>>(result).Data.Result;
+        }
+
+        public async Task<string> PostAndGetIdAsync<T>(string url, T jsonObject)
+        {
+            var uri = new Uri(_apiUrl, url);
+            var json = JObject.FromObject(jsonObject, _serializer).ToString();
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync(uri, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new BitmovinApiException(response);
+            }
+            var result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<ResponseEnvelope<IdWrapper>>(result).Data.Result.Id;
+        }
+
+        public async Task<string> PostAndGetIdAsync(string url)
+        {
+            var uri = new Uri(_apiUrl, url);
+            var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync(uri, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new BitmovinApiException(response);
+            }
+            var result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<ResponseEnvelope<IdWrapper>>(result).Data.Result.Id;
+        }
+
+        public async Task<T> GetAsync<T>(string url)
+        {
+            var uri = new Uri(_apiUrl, url);
+            var response = await _client.GetAsync(uri);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new BitmovinApiException(response);
+            }
+            var result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<ResponseEnvelope<T>>(result).Data.Result;
+        }
+
+        public async Task<Dictionary<string, object>> GetCustomDataAsync(string url)
+        {
+            var uri = new Uri(_apiUrl, url);
+            var response = await _client.GetAsync(uri);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new BitmovinApiException(response);
+            }
+            var result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
+        }
+
+        public async Task<List<T>> GetListAsync<T>(string url)
+        {
+            var uri = new Uri(_apiUrl, url);
+            var response = await _client.GetAsync(uri);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new BitmovinApiException(response);
+            }
+            var result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PaginationResponse<T>>(result).Data.Result.Items;
+        }
+
+        public async Task<List<T>> GetAllIterativeAsync<T>(string url)
+        {
+            var uri = new Uri(_apiUrl, url);
+            return await GetAllIterativeAsync<T>(uri);
+        }
+
+        private async Task<List<T>> GetAllIterativeAsync<T>(Uri uri)
+        {
+            var response = await _client.GetAsync(uri);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new BitmovinApiException(response);
+            }
+            var result = await response.Content.ReadAsStringAsync();
+            var paginationData = JsonConvert.DeserializeObject<PaginationResponse<T>>(result).Data;
+            var items = paginationData.Result.Items;
+            if (items.Count > 0)
+            {
+                var next = new Uri(paginationData.Result.Next);
+                return items.Concat(await GetAllIterativeAsync<T>(next)).ToList();
+            }
+            return items;
+        }
+
+        public async Task DeleteAsync(string url)
+        {
+            var uri = new Uri(_apiUrl, url);
+            var response = await _client.DeleteAsync(uri);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new BitmovinApiException(response);
+            }
+        }
+
+#endif
 
         public T Post<T>(string url, T jsonObject)
         {
@@ -118,10 +237,10 @@ namespace com.bitmovin.Api
         public List<T> GetAllIterative<T>(string url)
         {
             var uri = new Uri(_apiUrl, url);
-            return getAllIterative<T>(uri);
+            return GetAllIterative<T>(uri);
         }
 
-        private List<T> getAllIterative<T>(Uri uri)
+        private List<T> GetAllIterative<T>(Uri uri)
         {
             var response = _client.GetAsync(uri).Result;
             if (!response.IsSuccessStatusCode)
@@ -134,7 +253,7 @@ namespace com.bitmovin.Api
             if (items.Count > 0)
             {
                 var next = new Uri(paginationData.Result.Next);
-                return items.Concat(getAllIterative<T>(next)).ToList();
+                return items.Concat(GetAllIterative<T>(next)).ToList();
             }
             return items;
         }

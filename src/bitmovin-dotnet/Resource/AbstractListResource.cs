@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace com.bitmovin.Api.Resource
 {
@@ -13,6 +14,22 @@ namespace com.bitmovin.Api.Resource
             this._restClient = client;
             this._url = url;
         }
+
+#if !NET_40
+
+        public async Task<List<T>> RetrieveListAsync(int offset, int limit)
+        {
+            var retrieveUrl = string.Format("{0}?offset={1}&limit={2}", _url, offset, limit);
+            return await _restClient.GetListAsync<T>(retrieveUrl);
+        }
+
+        public async Task<List<T>> RetrieveAllIterativeAsync(int offset, int limit)
+        {
+            var retrieveUrl = string.Format("{0}?offset={1}&limit={2}", _url, offset, limit);
+            return await _restClient.GetAllIterativeAsync<T>(retrieveUrl);
+        }
+
+#endif
 
         public List<T> RetrieveList(int offset, int limit)
         {

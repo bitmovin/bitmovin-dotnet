@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using com.bitmovin.Api.Input;
 using com.bitmovin.Api.Rest;
+using Task = com.bitmovin.Api.Rest.Task;
 
 namespace com.bitmovin.Api.Resource
 {
@@ -15,6 +17,55 @@ namespace com.bitmovin.Api.Resource
             this._restClient = client;
             this._url = url;
         }
+
+#if !NET_40
+
+        public async Task<string> CreateAsync(string inputId, AnalysisInput item)
+        {
+            var createUrl = string.Format("{0}/{1}/analysis", _url, inputId);
+            var ai = await _restClient.PostAsync<AnalysisInput>(createUrl, item);
+            return ai.Id;
+        }
+
+        public async Task<AnalysisDetail> RetrieveDetailsAsync(string inputId, string analysisId)
+        {
+            var retrieveURL = string.Format("{0}/{1}/analysis/{2}", _url, inputId, analysisId);
+            return await _restClient.GetAsync<AnalysisDetail>(retrieveURL);
+        }
+
+        public async Task<Task> RetrieveStatusAsync(string inputId, string analysisId)
+        {
+            var retrieveURL = string.Format("{0}/{1}/analysis/{2}/status", _url, inputId, analysisId);
+            return (await _restClient.GetAsync<AnalysisStatus>(retrieveURL)).Analysis;
+        }
+
+        public async Task<List<Message>> RetrieveStreamDetailsAsync(string inputId, string analysisId, string streamId)
+        {
+            var retrieveURL = string.Format("{0}/{1}/analysis/{2}/{3}", _url, inputId, analysisId, streamId);
+            return (await _restClient.GetAsync<StreamDetail>(retrieveURL)).Messages;
+        }
+
+
+        public async Task<List<AnalysisDetail>> RetrieveListAsync(string inputId, int offset, int limit)
+        {
+            var retrieveUrl = string.Format("{0}/{1}/analysis?offset={1}&limit={2}", _url, inputId, offset, limit);
+            return await _restClient.GetListAsync<AnalysisDetail>(retrieveUrl);
+        }
+
+
+        public async Task<List<AnalysisDetail>> RetrieveAllIterativeAsync(string inputId, int offset, int limit)
+        {
+            var retrieveUrl = string.Format("{0}/{1}/analysis?offset={1}&limit={2}", inputId, _url, offset, limit);
+            return await _restClient.GetAllIterativeAsync<AnalysisDetail>(retrieveUrl);
+        }
+
+        public async Task<Dictionary<string, object>> RetrieveCustomDataAsync(string inputId, string analysisId)
+        {
+            var retrieveUrl = string.Format("{0}/{1}/analysis/{2}/customData", _url, inputId, analysisId);
+            return await _restClient.GetCustomDataAsync(retrieveUrl);
+        }
+
+#endif
 
         public string Create(string inputId, AnalysisInput item)
         {
