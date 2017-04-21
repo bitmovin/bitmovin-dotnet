@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using com.bitmovin.Api.Constants;
 using com.bitmovin.Api.Manifest;
+using com.bitmovin.Api.Manifest.Drm;
 using Task = com.bitmovin.Api.Rest.Task;
 
 namespace com.bitmovin.Api.Resource
@@ -12,7 +13,9 @@ namespace com.bitmovin.Api.Resource
         public AbstractTwoEmbeddedResource<VideoAdaptationSet> VideoAdaptationSet;
         public AbstractTwoEmbeddedResource<AudioAdaptationSet> SubtitleAdaptationSet;
         public AbstractTwoEmbeddedResource<VideoAdaptationSet> CustomAdaptationSet;
+        public AbstractThreeEmbeddedResource<ContentProtection> ContentProtection;
         public AbstractThreeEmbeddedResource<Fmp4> Fmp4;
+        public AbstractThreeEmbeddedResource<DrmFmp4> DrmFmp4;
         public AbstractThreeEmbeddedResource<Webm> Webm;
 
         public DashResource(RestClient client, string url) : base(client, url)
@@ -29,7 +32,10 @@ namespace com.bitmovin.Api.Resource
                 new AbstractTwoEmbeddedResource<VideoAdaptationSet>(client, ApiUrls.ManifestDashAddCustomAdaptionSet);
 
             this.Fmp4 = new AbstractThreeEmbeddedResource<Fmp4>(client, ApiUrls.ManifestDashAddRepresentationFmp4);
+            this.DrmFmp4 = new AbstractThreeEmbeddedResource<DrmFmp4>(client, ApiUrls.ManifestDashAddRepresentationFmp4Drm);
             this.Webm = new AbstractThreeEmbeddedResource<Webm>(client, ApiUrls.ManifestDashAddRepresentationWebm);
+
+            this.ContentProtection = new AbstractThreeEmbeddedResource<ContentProtection>(client, ApiUrls.ManifestDashAddContentProtectionToAdaptationSet);
 
         }
 

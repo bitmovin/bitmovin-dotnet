@@ -68,6 +68,12 @@
     <Compile Include="Container\InputContainer.cs" />
     <Compile Include="Container\ManifestContainer.cs" />
     <Compile Include="Container\OutputContainer.cs" />
+    <Compile Include="Encoding\Drm\FairPlay.cs" />
+    <Compile Include="Encoding\Drm\AESEncryption.cs" />
+    <Compile Include="Encoding\Drm\CencDrm.cs" />
+    <Compile Include="Encoding\Drm\CencMarlin.cs" />
+    <Compile Include="Encoding\Drm\CencPlayReady.cs" />
+    <Compile Include="Encoding\Drm\CencWidevine.cs" />
     <Compile Include="Encoding\Encoding.cs" />
     <Compile Include="Encoding\SegmentedWebm.cs" />
     <Compile Include="Encoding\Fmp4.cs" />
@@ -82,6 +88,7 @@
     <Compile Include="Encoding\StartLiveEncodingRequest.cs" />
     <Compile Include="Encoding\Stream.cs" />
     <Compile Include="Encoding\Ts.cs" />
+    <Compile Include="Enums\AesMethod.cs" />
     <Compile Include="Enums\AwsCloudRegion.cs" />
     <Compile Include="Enums\BAdapt.cs" />
     <Compile Include="Enums\ChannelLayout.cs" />
@@ -140,6 +147,8 @@
     <Compile Include="Manifest\BaseManifest.cs" />
     <Compile Include="Manifest\CustomAttribute.cs" />
     <Compile Include="Manifest\Dash.cs" />
+    <Compile Include="Manifest\Drm\ContentProtection.cs" />
+    <Compile Include="Manifest\DrmFmp4.cs" />
     <Compile Include="Manifest\Webm.cs" />
     <Compile Include="Manifest\Fmp4.cs" />
     <Compile Include="Manifest\Hls.cs" />
@@ -166,6 +175,8 @@
     <Compile Include="Resource\CloudOutputResource.cs" />
     <Compile Include="Resource\DashResource.cs" />
     <Compile Include="Resource\EncodingResource.cs" />
+    <Compile Include="Resource\TsResource.cs" />
+    <Compile Include="Resource\Fmp4Resource.cs" />
     <Compile Include="Resource\HlsResource.cs" />
     <Compile Include="Resource\InputResource.cs" />
     <Compile Include="Resource\CodecResource.cs" />
