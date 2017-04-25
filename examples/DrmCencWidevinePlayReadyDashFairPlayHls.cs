@@ -170,27 +170,27 @@ namespace com.bitmovin.Api.Examples
             var videoTsMuxing240p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(videoStream240p, segmentLength));
             var aesTs_240p = bitmovin.Encoding.Encoding.Ts.FairPlay.Create(encoding.Id, videoTsMuxing240p.Id,
-                CreateFairPlayForTsMuxing(output, "video/240p_hls"));
+                CreateFairPlayForTsMuxing(output, OUTPUT_PATH + "video/240p_hls"));
             var videoTsMuxing360p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(videoStream360p, segmentLength));
             var aesTs_360p = bitmovin.Encoding.Encoding.Ts.FairPlay.Create(encoding.Id, videoTsMuxing360p.Id,
-                CreateFairPlayForTsMuxing(output, "video/360p_hls"));
+                CreateFairPlayForTsMuxing(output, OUTPUT_PATH + "video/360p_hls"));
             var videoTsMuxing480p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(videoStream480p, segmentLength));
             var aesTs_480p = bitmovin.Encoding.Encoding.Ts.FairPlay.Create(encoding.Id, videoTsMuxing480p.Id,
-                CreateFairPlayForTsMuxing(output, "video/480p_hls"));
+                CreateFairPlayForTsMuxing(output, OUTPUT_PATH + "video/480p_hls"));
             var videoTsMuxing720p= bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(videoStream720p, segmentLength));
             var aesTs_720p = bitmovin.Encoding.Encoding.Ts.FairPlay.Create(encoding.Id, videoTsMuxing720p.Id,
-                CreateFairPlayForTsMuxing(output, "video/720p_hls"));
+                CreateFairPlayForTsMuxing(output, OUTPUT_PATH + "video/720p_hls"));
             var videoTsMuxing1080p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(videoStream1080p, segmentLength));
             var aesTs_1080p = bitmovin.Encoding.Encoding.Ts.FairPlay.Create(encoding.Id, videoTsMuxing1080p.Id,
-                CreateFairPlayForTsMuxing(output, "video/1080p_hls"));
+                CreateFairPlayForTsMuxing(output, OUTPUT_PATH + "video/1080p_hls"));
             var audioTsMuxing = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(audioStream, segmentLength));
             var aesTs_Audio = bitmovin.Encoding.Encoding.Ts.FairPlay.Create(encoding.Id, audioTsMuxing.Id,
-                CreateFairPlayForTsMuxing(output, "audio/128kbps_hls"));
+                CreateFairPlayForTsMuxing(output, OUTPUT_PATH + "audio/128kbps_hls"));
 
             // Start encoding
             bitmovin.Encoding.Encoding.Start(encoding.Id);
