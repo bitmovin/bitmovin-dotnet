@@ -34,6 +34,7 @@ namespace com.bitmovin.Api.Examples
 
         private const string FAIRPLAY_KEY = "YOUR FAIRPLAY KEY";
         private const string FAIRPLAY_IV = "YOUR FAIRPLAY IV";
+        private const string FAIRPLAY_URI = "YOUR FAIRPLAY URI";
 
         [TestMethod]
         public void StartVodEncoding()
@@ -454,6 +455,7 @@ namespace com.bitmovin.Api.Examples
             {
                 Key = FAIRPLAY_KEY,
                 Iv = FAIRPLAY_IV,
+                Uri = FAIRPLAY_URI,
                 Outputs = new List<Encoding.Output>() { encodingOutput }
             };
         }
