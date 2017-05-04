@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="CreateHlsVodManifestFromLiveStream.cs" />
     <Compile Include="CreateMpegDashVodManifestFromLiveStream.cs" />
-    <Compile Include="DrmCencWidevinePlayReadyDashAes128Hls.cs" />
+    <Compile Include="DrmCencWidevinePlayReadyDashAes128HlsWithPresetFast.cs" />
     <Compile Include="EncodingWithFtpInputAndFtpOutput.cs" />
     <Compile Include="GetLiveStreamStatistics.cs" />
     <Compile Include="EncodingWithS3InputAndFtpOutput.cs" />
