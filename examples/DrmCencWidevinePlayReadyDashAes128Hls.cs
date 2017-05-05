@@ -16,7 +16,7 @@ namespace com.bitmovin.Api.Examples
 {
 
     [TestClass]
-    public class DrmCencWidevinePlayReadyDashAes128HlsWithPresetFast
+    public class DrmCencWidevinePlayReadyDashAes128Hls
     {
         private const string API_KEY = "YOUR API KEY";
 
@@ -73,26 +73,65 @@ namespace com.bitmovin.Api.Examples
 
 
             // Create configurations and streams
+            var videoConfig1080p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
+            {
+                Name = "H264_Profile_1080p",
+                Profile = H264Profile.HIGH,
+                Width = 1920,
+                Height = 1080,
+                Bitrate = 4800000,
+                Rate = 30.0f
+            });
+            var videoStream1080p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
+                CreateStream(input, INPUT_PATH, 0, videoConfig1080p, SelectionMode.VIDEO_RELATIVE));
+
+            var videoConfig720p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
+            {
+                Name = "H264_Profile_720p",
+                Profile = H264Profile.HIGH,
+                Width = 1280,
+                Height = 720,
+                Bitrate = 2400000,
+                Rate = 30.0f
+            });
+            var videoStream720p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
+                CreateStream(input, INPUT_PATH, 0, videoConfig720p, SelectionMode.VIDEO_RELATIVE));
+
+            var videoConfig480p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
+            {
+                Name = "H264_Profile_480p",
+                Profile = H264Profile.HIGH,
+                Width = 858,
+                Height = 480,
+                Bitrate = 1200000,
+                Rate = 30.0f
+            });
+            var videoStream480p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
+                CreateStream(input, INPUT_PATH, 0, videoConfig480p, SelectionMode.VIDEO_RELATIVE));
+
             var videoConfig360p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
             {
                 Name = "H264_Profile_360p",
-                Profile = H264Profile.MAIN,
+                Profile = H264Profile.HIGH,
                 Width = 640,
                 Height = 360,
                 Bitrate = 800000,
-                BFrames = 3,
-                Cabac = true,
-                MvSearchRangeMax = 16,
-                RefFrames = 2,
-                MvPredictionMode = MvPredictionMode.SPATIAL,
-                RcLookahead = 30,
-                SubMe = H264SubMe.RD_IP,
-                MotionEstimationMethod = H264MotionEstimationMethod.HEX,
-                BAdaptiveStrategy = BAdapt.FAST,
-                Partitions = new List<H264Partition> { H264Partition.I4X4, H264Partition.I8X8, H264Partition.P8X8, H264Partition.B8X8 }
+                Rate = 30.0f
             });
             var videoStream360p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
                 CreateStream(input, INPUT_PATH, 0, videoConfig360p, SelectionMode.VIDEO_RELATIVE));
+
+            var videoConfig240p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
+            {
+                Name = "H264_Profile_240p",
+                Profile = H264Profile.HIGH,
+                Width = 426,
+                Height = 240,
+                Bitrate = 400000,
+                Rate = 30.0f
+            });
+            var videoStream240p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
+                CreateStream(input, INPUT_PATH, 0, videoConfig240p, SelectionMode.VIDEO_RELATIVE));
 
             var audioConfig = bitmovin.Codec.Aac.Create(new AACAudioConfiguration
             {
@@ -105,10 +144,26 @@ namespace com.bitmovin.Api.Examples
 
 
             // Create FMP4 Muxing for DASH
+            var videoFMP4Muxing240p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream240p, segmentLength));
+            var cencFmp4_240p = bitmovin.Encoding.Encoding.Fmp4.CencDrm.Create(encoding.Id, videoFMP4Muxing240p.Id,
+                CreateCencDrmForFMP4Muxing(output, OUTPUT_PATH + "video/240p_dash"));
             var videoFMP4Muxing360p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
                 CreateFMP4Muxing(videoStream360p, segmentLength));
             var cencFmp4_360p = bitmovin.Encoding.Encoding.Fmp4.CencDrm.Create(encoding.Id, videoFMP4Muxing360p.Id,
                 CreateCencDrmForFMP4Muxing(output, OUTPUT_PATH + "video/360p_dash"));
+            var videoFMP4Muxing480p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream480p, segmentLength));
+            var cencFmp4_480p = bitmovin.Encoding.Encoding.Fmp4.CencDrm.Create(encoding.Id, videoFMP4Muxing480p.Id,
+                CreateCencDrmForFMP4Muxing(output, OUTPUT_PATH + "video/480p_dash"));
+            var videoFMP4Muxing720p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream720p, segmentLength));
+            var cencFmp4_720p = bitmovin.Encoding.Encoding.Fmp4.CencDrm.Create(encoding.Id, videoFMP4Muxing720p.Id,
+                CreateCencDrmForFMP4Muxing(output, OUTPUT_PATH + "video/720p_dash"));
+            var videoFMP4Muxing1080p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
+                CreateFMP4Muxing(videoStream1080p, segmentLength));
+            var cencFmp4_1080p = bitmovin.Encoding.Encoding.Fmp4.CencDrm.Create(encoding.Id, videoFMP4Muxing1080p.Id,
+                CreateCencDrmForFMP4Muxing(output, OUTPUT_PATH + "video/1080p_dash"));
             var audioFMP4Muxing = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
                 CreateFMP4Muxing(audioStream, segmentLength));
             var cencFmp4_Audio = bitmovin.Encoding.Encoding.Fmp4.CencDrm.Create(encoding.Id, audioFMP4Muxing.Id,
@@ -116,10 +171,26 @@ namespace com.bitmovin.Api.Examples
 
 
             // Create TS Muxings for HLS
+            var videoTsMuxing240p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
+                CreateTsMuxing(videoStream240p, segmentLength));
+            var aesTs_240p = bitmovin.Encoding.Encoding.Ts.Aes.Create(encoding.Id, videoTsMuxing240p.Id,
+                CreateAes128ForTsMuxing(output, OUTPUT_PATH + "video/240p_hls"));
             var videoTsMuxing360p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(videoStream360p, segmentLength));
             var aesTs_360p = bitmovin.Encoding.Encoding.Ts.Aes.Create(encoding.Id, videoTsMuxing360p.Id,
                 CreateAes128ForTsMuxing(output, OUTPUT_PATH + "video/360p_hls"));
+            var videoTsMuxing480p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
+                CreateTsMuxing(videoStream480p, segmentLength));
+            var aesTs_480p = bitmovin.Encoding.Encoding.Ts.Aes.Create(encoding.Id, videoTsMuxing480p.Id,
+                CreateAes128ForTsMuxing(output, OUTPUT_PATH + "video/480p_hls"));
+            var videoTsMuxing720p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
+                CreateTsMuxing(videoStream720p, segmentLength));
+            var aesTs_720p = bitmovin.Encoding.Encoding.Ts.Aes.Create(encoding.Id, videoTsMuxing720p.Id,
+                CreateAes128ForTsMuxing(output, OUTPUT_PATH + "video/720p_hls"));
+            var videoTsMuxing1080p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
+                CreateTsMuxing(videoStream1080p, segmentLength));
+            var aesTs_1080p = bitmovin.Encoding.Encoding.Ts.Aes.Create(encoding.Id, videoTsMuxing1080p.Id,
+                CreateAes128ForTsMuxing(output, OUTPUT_PATH + "video/1080p_hls"));
             var audioTsMuxing = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
                 CreateTsMuxing(audioStream, segmentLength));
             var aesTs_Audio = bitmovin.Encoding.Encoding.Ts.Aes.Create(encoding.Id, audioTsMuxing.Id,
@@ -180,7 +251,17 @@ namespace com.bitmovin.Api.Examples
             };
 
             bitmovin.Manifest.Hls.AddMediaInfo(manifestHls.Id, mediaInfo);
-            
+
+            bitmovin.Manifest.Hls.AddStreamInfo(manifestHls.Id, new StreamInfo
+            {
+                Uri = "video_240.m3u8",
+                EncodingId = encoding.Id,
+                StreamId = videoStream240p.Id,
+                MuxingId = videoTsMuxing240p.Id,
+                DrmId = aesTs_240p.Id,
+                Audio = "audio",
+                SegmentPath = "video/240p_hls/"
+            });
             bitmovin.Manifest.Hls.AddStreamInfo(manifestHls.Id, new StreamInfo
             {
                 Uri = "video_360.m3u8",
@@ -190,6 +271,36 @@ namespace com.bitmovin.Api.Examples
                 DrmId = aesTs_360p.Id,
                 Audio = "audio",
                 SegmentPath = "video/360p_hls/"
+            });
+            bitmovin.Manifest.Hls.AddStreamInfo(manifestHls.Id, new StreamInfo
+            {
+                Uri = "video_480.m3u8",
+                EncodingId = encoding.Id,
+                StreamId = videoStream480p.Id,
+                MuxingId = videoTsMuxing480p.Id,
+                DrmId = aesTs_480p.Id,
+                Audio = "audio",
+                SegmentPath = "video/480p_hls/"
+            });
+            bitmovin.Manifest.Hls.AddStreamInfo(manifestHls.Id, new StreamInfo
+            {
+                Uri = "video_720.m3u8",
+                EncodingId = encoding.Id,
+                StreamId = videoStream720p.Id,
+                MuxingId = videoTsMuxing720p.Id,
+                DrmId = aesTs_720p.Id,
+                Audio = "audio",
+                SegmentPath = "video/720p_hls/"
+            });
+            bitmovin.Manifest.Hls.AddStreamInfo(manifestHls.Id, new StreamInfo
+            {
+                Uri = "video_1080.m3u8",
+                EncodingId = encoding.Id,
+                StreamId = videoStream1080p.Id,
+                MuxingId = videoTsMuxing1080p.Id,
+                DrmId = aesTs_1080p.Id,
+                Audio = "audio",
+                SegmentPath = "video/1080p_hls/"
             });
 
             bitmovin.Manifest.Hls.Start(manifestHls.Id);
@@ -222,8 +333,8 @@ namespace com.bitmovin.Api.Examples
                 new ContentProtection
                 {
                     EncodingId = encoding.Id,
-                    MuxingId = videoFMP4Muxing360p.Id,
-                    DrmId = cencFmp4_360p.Id
+                    MuxingId = videoFMP4Muxing240p.Id,
+                    DrmId = cencFmp4_240p.Id
                 });
             var audioAdaptationSet = bitmovin.Manifest.Dash.AudioAdaptationSet.Create(manifestDash.Id, period.Id,
                 new AudioAdaptationSet { Lang = "en" });
@@ -250,11 +361,47 @@ namespace com.bitmovin.Api.Examples
                 {
                     Type = SegmentScheme.TEMPLATE,
                     EncodingId = encoding.Id,
+                    MuxingId = videoFMP4Muxing240p.Id,
+                    DrmId = cencFmp4_240p.Id,
+                    SegmentPath = "video/240p_dash"
+                });
+            bitmovin.Manifest.Dash.DrmFmp4.Create(manifestDash.Id, period.Id, videoAdaptationSet.Id,
+                new DrmFmp4
+                {
+                    Type = SegmentScheme.TEMPLATE,
+                    EncodingId = encoding.Id,
                     MuxingId = videoFMP4Muxing360p.Id,
                     DrmId = cencFmp4_360p.Id,
                     SegmentPath = "video/360p_dash"
                 });
-            
+            bitmovin.Manifest.Dash.DrmFmp4.Create(manifestDash.Id, period.Id, videoAdaptationSet.Id,
+                new DrmFmp4
+                {
+                    Type = SegmentScheme.TEMPLATE,
+                    EncodingId = encoding.Id,
+                    MuxingId = videoFMP4Muxing480p.Id,
+                    DrmId = cencFmp4_480p.Id,
+                    SegmentPath = "video/480p_dash"
+                });
+            bitmovin.Manifest.Dash.DrmFmp4.Create(manifestDash.Id, period.Id, videoAdaptationSet.Id,
+                new DrmFmp4
+                {
+                    Type = SegmentScheme.TEMPLATE,
+                    EncodingId = encoding.Id,
+                    MuxingId = videoFMP4Muxing720p.Id,
+                    DrmId = cencFmp4_720p.Id,
+                    SegmentPath = "video/720p_dash"
+                });
+            bitmovin.Manifest.Dash.DrmFmp4.Create(manifestDash.Id, period.Id, videoAdaptationSet.Id,
+                new DrmFmp4
+                {
+                    Type = SegmentScheme.TEMPLATE,
+                    EncodingId = encoding.Id,
+                    MuxingId = videoFMP4Muxing1080p.Id,
+                    DrmId = cencFmp4_1080p.Id,
+                    SegmentPath = "video/1080p_dash"
+                });
+
             bitmovin.Manifest.Dash.Start(manifestDash.Id);
             var dashManifestStatus = bitmovin.Manifest.Dash.RetrieveStatus(manifestDash.Id);
 

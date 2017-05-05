@@ -58,113 +58,58 @@ namespace com.bitmovin.Api.Examples
 
 
             // Create configurations and streams
-            var videoConfig1080p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
-            {
-                Name = "H264_Profile_1080p",
-                Profile = H264Profile.HIGH,
-                Width = 1920,
-                Height = 1080,
-                Bitrate = 4800000,
-                Rate = 30.0f,
-                BFrames = 3,
-                Cabac = true,
-                MvSearchRangeMax = 16,
-                RefFrames = 2,
-                MvPredictionMode = MvPredictionMode.SPATIAL,
-                RcLookahead = 30,
-                SubMe = H264SubMe.RD_IP,
-                MotionEstimationMethod = H264MotionEstimationMethod.HEX,
-                BAdaptiveStrategy = BAdapt.FAST,
-                Partitions = new List<H264Partition> { H264Partition.I4X4, H264Partition.I8X8, H264Partition.P8X8, H264Partition.B8X8 }
-            });
+            var videoConfig1080p = H264VideoConfigurationFactory.CreateConfigurationWithPreset(H264Preset.FAST,
+                "H264_Profile_1080p");
+            videoConfig1080p.Profile = H264Profile.HIGH;
+            videoConfig1080p.Width = 1920;
+            videoConfig1080p.Height = 1080;
+            videoConfig1080p.Bitrate = 4800000;
+            videoConfig1080p.Rate = 30.0f;
+            videoConfig1080p = bitmovin.Codec.H264.Create(videoConfig1080p);
             var videoStream1080p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
                 CreateStream(httpHost, INPUT_HTTP_PATH, 0, videoConfig1080p, SelectionMode.VIDEO_RELATIVE));
 
-            var videoConfig720p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
-            {
-                Name = "H264_Profile_720p",
-                Profile = H264Profile.HIGH,
-                Width = 1280,
-                Height = 720,
-                Bitrate = 2400000,
-                Rate = 30.0f,
-                BFrames = 3,
-                Cabac = true,
-                MvSearchRangeMax = 16,
-                RefFrames = 2,
-                MvPredictionMode = MvPredictionMode.SPATIAL,
-                RcLookahead = 30,
-                SubMe = H264SubMe.RD_IP,
-                MotionEstimationMethod = H264MotionEstimationMethod.HEX,
-                BAdaptiveStrategy = BAdapt.FAST,
-                Partitions = new List<H264Partition> { H264Partition.I4X4, H264Partition.I8X8, H264Partition.P8X8, H264Partition.B8X8 }
-            });
+            var videoConfig720p = H264VideoConfigurationFactory.CreateConfigurationWithPreset(H264Preset.FAST,
+                "H264_Profile_720p");
+            videoConfig720p.Profile = H264Profile.HIGH;
+            videoConfig720p.Width = 1280;
+            videoConfig720p.Height = 720;
+            videoConfig720p.Bitrate = 2400000;
+            videoConfig720p.Rate = 30.0f;
+            videoConfig720p = bitmovin.Codec.H264.Create(videoConfig720p);
             var videoStream720p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
                 CreateStream(httpHost, INPUT_HTTP_PATH, 0, videoConfig720p, SelectionMode.VIDEO_RELATIVE));
 
-            var videoConfig480p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
-            {
-                Name = "H264_Profile_480p",
-                Profile = H264Profile.HIGH,
-                Width = 858,
-                Height = 480,
-                Bitrate = 1200000,
-                Rate = 30.0f,
-                BFrames = 3,
-                Cabac = true,
-                MvSearchRangeMax = 16,
-                RefFrames = 2,
-                MvPredictionMode = MvPredictionMode.SPATIAL,
-                RcLookahead = 30,
-                SubMe = H264SubMe.RD_IP,
-                MotionEstimationMethod = H264MotionEstimationMethod.HEX,
-                BAdaptiveStrategy = BAdapt.FAST,
-                Partitions = new List<H264Partition> { H264Partition.I4X4, H264Partition.I8X8, H264Partition.P8X8, H264Partition.B8X8 }
-            });
+            var videoConfig480p = H264VideoConfigurationFactory.CreateConfigurationWithPreset(H264Preset.FAST,
+                "H264_Profile_480p");
+            videoConfig480p.Profile = H264Profile.HIGH;
+            videoConfig480p.Width = 858;
+            videoConfig480p.Height = 480;
+            videoConfig480p.Bitrate = 1200000;
+            videoConfig480p.Rate = 30.0f;
+            videoConfig480p = bitmovin.Codec.H264.Create(videoConfig480p);
             var videoStream480p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
                 CreateStream(httpHost, INPUT_HTTP_PATH, 0, videoConfig480p, SelectionMode.VIDEO_RELATIVE));
 
-            var videoConfig360p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
-            {
-                Name = "H264_Profile_360p",
-                Profile = H264Profile.HIGH,
-                Width = 640,
-                Height = 360,
-                Bitrate = 800000,
-                Rate = 30.0f,
-                BFrames = 3,
-                Cabac = true,
-                MvSearchRangeMax = 16,
-                RefFrames = 2,
-                MvPredictionMode = MvPredictionMode.SPATIAL,
-                RcLookahead = 30,
-                SubMe = H264SubMe.RD_IP,
-                MotionEstimationMethod = H264MotionEstimationMethod.HEX,
-                BAdaptiveStrategy = BAdapt.FAST,
-                Partitions = new List<H264Partition> { H264Partition.I4X4, H264Partition.I8X8, H264Partition.P8X8, H264Partition.B8X8 }
-            });
+            var videoConfig360p = H264VideoConfigurationFactory.CreateConfigurationWithPreset(H264Preset.FAST,
+                "H264_Profile_360p");
+            videoConfig360p.Profile = H264Profile.HIGH;
+            videoConfig360p.Width = 640;
+            videoConfig360p.Height = 360;
+            videoConfig360p.Bitrate = 800000;
+            videoConfig360p.Rate = 30.0f;
+            videoConfig360p = bitmovin.Codec.H264.Create(videoConfig360p);
             var videoStream360p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
                 CreateStream(httpHost, INPUT_HTTP_PATH, 0, videoConfig360p, SelectionMode.VIDEO_RELATIVE));
 
-            var videoConfig240p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
-            {
-                Name = "H264_Profile_240p",
-                Profile = H264Profile.HIGH,
-                Width = 426,
-                Height = 240,
-                Bitrate = 400000,
-                Rate = 30.0f,
-                BFrames = 3,
-                Cabac = true,
-                MvSearchRangeMax = 16,
-                RefFrames = 2,
-                MvPredictionMode = MvPredictionMode.SPATIAL,
-                RcLookahead = 30,
-                SubMe = H264SubMe.RD_IP,
-                MotionEstimationMethod = H264MotionEstimationMethod.HEX,
-                BAdaptiveStrategy = BAdapt.FAST,
-                Partitions = new List<H264Partition> { H264Partition.I4X4, H264Partition.I8X8, H264Partition.P8X8, H264Partition.B8X8 }
-            });
+            var videoConfig240p = H264VideoConfigurationFactory.CreateConfigurationWithPreset(H264Preset.FAST,
+                "H264_Profile_240p");
+            videoConfig240p.Profile = H264Profile.HIGH;
+            videoConfig240p.Width = 426;
+            videoConfig240p.Height = 240;
+            videoConfig240p.Bitrate = 400000;
+            videoConfig240p.Rate = 30.0f;
+            videoConfig240p = bitmovin.Codec.H264.Create(videoConfig240p);
             var videoStream240p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
                 CreateStream(httpHost, INPUT_HTTP_PATH, 0, videoConfig240p, SelectionMode.VIDEO_RELATIVE));
 

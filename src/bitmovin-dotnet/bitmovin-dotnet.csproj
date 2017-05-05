@@ -58,6 +58,7 @@
     <Compile Include="Codec\CodecConfig.cs" />
     <Compile Include="Codec\CodecTypeContainer.cs" />
     <Compile Include="Codec\H264VideoConfiguration.cs" />
+    <Compile Include="Codec\H264VideoConfigurationFactory.cs" />
     <Compile Include="Codec\VP9VideoConfiguration.cs" />
     <Compile Include="Codec\H265VideoConfiguration.cs" />
     <Compile Include="Codec\VideoConfiguration.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Enums\EncodingStatus.cs" />
     <Compile Include="Enums\FtpTransferVersion.cs" />
     <Compile Include="Enums\GcsCloudRegion.cs" />
+    <Compile Include="Enums\H264Preset.cs" />
     <Compile Include="Enums\H264Trellis.cs" />
     <Compile Include="Enums\H264Level.cs" />
     <Compile Include="Enums\H264InterlaceMode.cs" />
