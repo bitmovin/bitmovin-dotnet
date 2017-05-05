@@ -56,10 +56,10 @@
         public const string FairPlayFmp4Drms = "encoding/encodings/{encoding_id}/muxings/fmp4/{muxing_id}/drm/fairplay";
         public const string MarlinDrms = "encoding/encodings/{encoding_id}/muxings/fmp4/{muxing_id}/drm/marlin";
         public const string ClearKeyDrms = "encoding/encodings/{encoding_id}/muxings/fmp4/{muxing_id}/drm/clearkey";
-        public const string CencDrms = "encoding/encodings/{encoding_id}/muxings/fmp4/{muxing_id}/drm/cenc";
+        public const string CencDrms = "encoding/encodings/{0}/muxings/fmp4/{1}/drm/cenc";
 
-        public const string FairPlayTsDrms = "encoding/encodings/{encoding_id}/muxings/ts/{muxing_id}/drm/fairplay";
-        public const string AesEncryptionDrms = "encoding/encodings/{encoding_id}/muxings/ts/{muxing_id}/drm/aes";
+        public const string FairPlayTsDrms = "encoding/encodings/{0}/muxings/ts/{1}/drm/fairplay";
+        public const string AesEncryptionDrms = "encoding/encodings/{0}/muxings/ts/{1}/drm/aes";
 
         public const string AddWidevineDrmToFmp4Muxing =
             "encoding/encodings/{encoding_id}/muxings/fmp4/{muxing_id}/drm/widevine";
@@ -126,11 +126,14 @@
         public const string ManifestDashAddRepresentationFmp4 =
             "encoding/manifests/dash/{0}/periods/{1}/adaptationsets/{2}/representations/fmp4";
 
+        public const string ManifestDashAddRepresentationFmp4Drm =
+            "encoding/manifests/dash/{0}/periods/{1}/adaptationsets/{2}/representations/fmp4/drm";
+
         public const string ManifestDashAddRepresentationWebm =
             "encoding/manifests/dash/{0}/periods/{1}/adaptationsets/{2}/representations/webm";
 
         public const string ManifestDashAddContentProtectionToAdaptationSet =
-            "encoding/manifests/dash/{manifestId}/periods/{periodId}/adaptationsets/{adaptionsetId}/contentprotection";
+            "encoding/manifests/dash/{0}/periods/{1}/adaptationsets/{2}/contentprotection";
 
         public const string ManifestDashAddContentProtectionTofMp4Representation =
                 "encoding/manifests/dash/{manifestId}/periods/{periodId}/adaptationsets/{adaptionsetId}/representations/fmp4/{representationId}/contentprotection"

@@ -20,7 +20,7 @@ namespace com.bitmovin.Api.Manifest
 
         public string MuxingId { get; set; }
 
-        public string DrmID { get; set; }
+        public string DrmId { get; set; }
 
         public int? StartSegmentNumber { get; set; }
 
