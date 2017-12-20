@@ -14,34 +14,38 @@ namespace com.bitmovin.Api.Examples
 {
 
     [TestClass]
-    public class EncodingWithS3InputAndFtpOutput
+    public class EncodingWithAzureInputAndAzureOutput
     {
 
         private const string API_KEY = "YOUR API KEY";
 
-        private const string S3_INPUT_BUCKETNAME = "YOUR S3 INPUT BUCKET";
-        private const string S3_INPUT_ACCESS_KEY = "YOUR S3 INPUT ACCESS KEY";
-        private const string S3_INPUT_SECRET_KEY = "YOUR S3 INPUT SECRET KEY";
-        private const string S3_INPUT_PATH = "path/to/your/input";
+        private const string AZURE_INPUT_TEST_ACCOUNT_NAME   = "YOUR AZURE INPUT ACCOUNT NAME";
+        private const string AZURE_INPUT_TEST_ACCOUNT_KEY    = "YOUR ACURE INPUT ACCOUNT KEY";
+        private const string AZURE_INPUT_TEST_CONTAINER_NAME = "YOUR AZURE INPUT CONTAINER NAME";
+        private const string AZURE_INPUT_PATH = "/path/to/your/file.ext";
 
-        private const string FTP_OUTPUT_HOST = "YOUR FTP OUTPUT HOST";
-        private const string FTP_OUTPUT_USERNAME = "YOUR FTP OUTPUT USERNAME";
-        private const string FTP_OUTPUT_PASSWORD = "YOUR FTP OUTPUT PASSWORD";
-        private const string FTP_OUTPUT_PATH = "path/to/output/";
+        private const string AZURE_OUTPUT_TEST_ACCOUNT_NAME = "YOUR AZURE OUTPUT ACCOUNT NAME";
+        private const string AZURE_OUTPUT_TEST_ACCOUNT_KEY = "YOUR AZURE OUTPUT ACCOUNT KEY";
+        private const string AZURE_OUTPUT_TEST_CONTAINER_NAME = "YOUR AZURE OUTPUT CONTAINER NAME";
+        private const string AZURE_OUTPUT_PATH = "path/to/output/";
+
 
         [TestMethod]
         public void StartVodEncoding()
         {
+            // If you run into network errors, try uncommenting the following line.
+            //System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Ssl3 | System.Net.SecurityProtocolType.Tls12;
+
             var bitmovin = new BitmovinApi(API_KEY);
             double? segmentLength = 4.0;
 
             // Create Output
-            var output = bitmovin.Output.Ftp.Create(new FtpOutput
+            var output = bitmovin.Output.Azure.Create(new AzureOutput
             {
-                Name = "FTP Output",
-                Host = FTP_OUTPUT_HOST,
-                Username = FTP_OUTPUT_USERNAME,
-                Password = FTP_OUTPUT_PASSWORD
+                Name = "Azure Output",
+                AccountName = AZURE_OUTPUT_TEST_ACCOUNT_NAME,
+                AccountKey = AZURE_OUTPUT_TEST_ACCOUNT_KEY,
+                Container = AZURE_OUTPUT_TEST_CONTAINER_NAME
             });
 
             // Create encoding
@@ -53,12 +57,12 @@ namespace com.bitmovin.Api.Examples
             });
 
 
-            var input = bitmovin.Input.S3.Create(new S3Input
+            var input = bitmovin.Input.Azure.Create(new AzureInput
             { 
-                Name = "S3 Input",
-                BucketName = S3_INPUT_BUCKETNAME,
-                AccessKey = S3_INPUT_ACCESS_KEY,
-                SecretKey = S3_INPUT_SECRET_KEY
+                Name = "Azure Input",
+                AccountName = AZURE_INPUT_TEST_ACCOUNT_NAME,
+                AccountKey = AZURE_INPUT_TEST_ACCOUNT_KEY,
+                Container = AZURE_INPUT_TEST_CONTAINER_NAME
             });
 
 
@@ -73,7 +77,7 @@ namespace com.bitmovin.Api.Examples
                 Rate = 30.0f
             });
             var videoStream1080p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
-                CreateStream(input, S3_INPUT_PATH, 0, videoConfig1080p, SelectionMode.VIDEO_RELATIVE));
+                CreateStream(input, AZURE_INPUT_PATH, 0, videoConfig1080p, SelectionMode.VIDEO_RELATIVE));
 
             var videoConfig720p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
             {
@@ -85,7 +89,7 @@ namespace com.bitmovin.Api.Examples
                 Rate = 30.0f
             });
             var videoStream720p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
-                CreateStream(input, S3_INPUT_PATH, 0, videoConfig720p, SelectionMode.VIDEO_RELATIVE));
+                CreateStream(input, AZURE_INPUT_PATH, 0, videoConfig720p, SelectionMode.VIDEO_RELATIVE));
 
             var videoConfig480p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
             {
@@ -97,7 +101,7 @@ namespace com.bitmovin.Api.Examples
                 Rate = 30.0f
             });
             var videoStream480p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
-                CreateStream(input, S3_INPUT_PATH, 0, videoConfig480p, SelectionMode.VIDEO_RELATIVE));
+                CreateStream(input, AZURE_INPUT_PATH, 0, videoConfig480p, SelectionMode.VIDEO_RELATIVE));
 
             var videoConfig360p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
             {
@@ -109,7 +113,7 @@ namespace com.bitmovin.Api.Examples
                 Rate = 30.0f
             });
             var videoStream360p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
-                CreateStream(input, S3_INPUT_PATH, 0, videoConfig360p, SelectionMode.VIDEO_RELATIVE));
+                CreateStream(input, AZURE_INPUT_PATH, 0, videoConfig360p, SelectionMode.VIDEO_RELATIVE));
 
             var videoConfig240p = bitmovin.Codec.H264.Create(new H264VideoConfiguration
             {
@@ -121,7 +125,7 @@ namespace com.bitmovin.Api.Examples
                 Rate = 30.0f
             });
             var videoStream240p = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
-                CreateStream(input, S3_INPUT_PATH, 0, videoConfig240p, SelectionMode.VIDEO_RELATIVE));
+                CreateStream(input, AZURE_INPUT_PATH, 0, videoConfig240p, SelectionMode.VIDEO_RELATIVE));
 
             var audioConfig = bitmovin.Codec.Aac.Create(new AACAudioConfiguration
             {
@@ -130,37 +134,37 @@ namespace com.bitmovin.Api.Examples
                 Rate = 48000
             });
             var audioStream = bitmovin.Encoding.Encoding.Stream.Create(encoding.Id,
-                CreateStream(input, S3_INPUT_PATH, 0, audioConfig, SelectionMode.AUDIO_RELATIVE));
+                CreateStream(input, AZURE_INPUT_PATH, 0, audioConfig, SelectionMode.AUDIO_RELATIVE));
 
 
             // Create FMP4 Muxing for DASH
             var videoFMP4Muxing240p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream240p, output, FTP_OUTPUT_PATH + "video/240p_dash", segmentLength));
+                CreateFMP4Muxing(videoStream240p, output, AZURE_OUTPUT_PATH + "video/240p_dash", segmentLength));
             var videoFMP4Muxing360p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream360p, output, FTP_OUTPUT_PATH + "video/360p_dash", segmentLength));
+                CreateFMP4Muxing(videoStream360p, output, AZURE_OUTPUT_PATH + "video/360p_dash", segmentLength));
             var videoFMP4Muxing480p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream480p, output, FTP_OUTPUT_PATH + "video/480p_dash", segmentLength));
+                CreateFMP4Muxing(videoStream480p, output, AZURE_OUTPUT_PATH + "video/480p_dash", segmentLength));
             var videoFMP4Muxing720p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream720p, output, FTP_OUTPUT_PATH + "video/720p_dash", segmentLength));
+                CreateFMP4Muxing(videoStream720p, output, AZURE_OUTPUT_PATH + "video/720p_dash", segmentLength));
             var videoFMP4Muxing1080p = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(videoStream1080p, output, FTP_OUTPUT_PATH + "video/1080p_dash", segmentLength));
+                CreateFMP4Muxing(videoStream1080p, output, AZURE_OUTPUT_PATH + "video/1080p_dash", segmentLength));
             var audioFMP4Muxing = bitmovin.Encoding.Encoding.Fmp4.Create(encoding.Id,
-                CreateFMP4Muxing(audioStream, output, FTP_OUTPUT_PATH + "audio/128kbps_dash", segmentLength));
+                CreateFMP4Muxing(audioStream, output, AZURE_OUTPUT_PATH + "audio/128kbps_dash", segmentLength));
 
 
             // Create TS Muxings for HLS
             var videoTsMuxing240p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
-                CreateTsMuxing(videoStream240p, output, FTP_OUTPUT_PATH + "video/240p_hls", segmentLength));
+                CreateTsMuxing(videoStream240p, output, AZURE_OUTPUT_PATH + "video/240p_hls", segmentLength));
             var videoTsMuxing360p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
-                CreateTsMuxing(videoStream360p, output, FTP_OUTPUT_PATH + "video/360p_hls", segmentLength));
+                CreateTsMuxing(videoStream360p, output, AZURE_OUTPUT_PATH + "video/360p_hls", segmentLength));
             var videoTsMuxing480p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
-                CreateTsMuxing(videoStream480p, output, FTP_OUTPUT_PATH + "video/480p_hls", segmentLength));
+                CreateTsMuxing(videoStream480p, output, AZURE_OUTPUT_PATH + "video/480p_hls", segmentLength));
             var videoTsMuxing720p= bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
-                CreateTsMuxing(videoStream720p, output, FTP_OUTPUT_PATH + "video/720p_hls", segmentLength));
+                CreateTsMuxing(videoStream720p, output, AZURE_OUTPUT_PATH + "video/720p_hls", segmentLength));
             var videoTsMuxing1080p = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
-                CreateTsMuxing(videoStream1080p, output, FTP_OUTPUT_PATH + "video/1080p_hls", segmentLength));
+                CreateTsMuxing(videoStream1080p, output, AZURE_OUTPUT_PATH + "video/1080p_hls", segmentLength));
             var audioTsMuxing = bitmovin.Encoding.Encoding.Ts.Create(encoding.Id,
-                CreateTsMuxing(audioStream, output, FTP_OUTPUT_PATH + "audio/128kbps_hls", segmentLength));
+                CreateTsMuxing(audioStream, output, AZURE_OUTPUT_PATH + "audio/128kbps_hls", segmentLength));
             
             // Start encoding
             bitmovin.Encoding.Encoding.Start(encoding.Id);
@@ -184,7 +188,7 @@ namespace com.bitmovin.Api.Examples
             // Create manifest output (can be used for both HLS + DASH)
             var manifestOutput = new Encoding.Output
             {
-                OutputPath = FTP_OUTPUT_PATH,
+                OutputPath = AZURE_OUTPUT_PATH,
                 OutputId = output.Id,
                 Acl = new List<Acl> { new Acl { Permission = Permission.PUBLIC_READ } }
             };
@@ -402,7 +406,7 @@ namespace com.bitmovin.Api.Examples
             return muxing;
         }
 
-        private static Stream CreateStream(S3Input input, string inputPath, int? position,
+        private static Stream CreateStream(AzureInput input, string inputPath, int? position,
             CodecConfig codecConfig, SelectionMode selectionMode)
         {
 
