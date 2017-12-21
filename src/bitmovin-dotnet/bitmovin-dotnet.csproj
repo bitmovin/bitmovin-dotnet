@@ -133,6 +133,7 @@
     <Compile Include="Input\AnalysisDetail.cs" />
     <Compile Include="Input\AnalysisInput.cs" />
     <Compile Include="Input\AnalysisStatus.cs" />
+    <Compile Include="Input\AsperaInput.cs" />
     <Compile Include="Input\AzureInput.cs" />
     <Compile Include="Input\BaseInput.cs" />
     <Compile Include="Input\FtpInput.cs" />

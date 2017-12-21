@@ -6,7 +6,8 @@ namespace com.bitmovin.Api.Container
 {
     public class InputContainer
     {
-        public AbstractResource<AzureInput> Aspera { get; private set; }
+        public AbstractResource<AzureInput> Azure { get; private set; }
+        public AbstractResource<AsperaInput> Aspera { get; private set; }
         public AbstractResource<HttpInput> Http { get; private set; }
         public AbstractResource<HttpsInput> Https { get; private set; }
         public InputResource<BaseInput> Input { get; private set; }
@@ -18,7 +19,8 @@ namespace com.bitmovin.Api.Container
 
         public InputContainer(RestClient client)
         {
-            this.Aspera = new AbstractResource<AzureInput>(client, ApiUrls.InputAzure);
+            this.Aspera = new AbstractResource<AsperaInput>(client, ApiUrls.InputAspera);
+            this.Azure = new AbstractResource<AzureInput>(client, ApiUrls.InputAzure);
             this.Http = new AbstractResource<HttpInput>(client, ApiUrls.InputHttp);
             this.Https = new AbstractResource<HttpsInput>(client, ApiUrls.InputHttps);
             this.Input = new InputResource<BaseInput>(client, ApiUrls.Inputs);
