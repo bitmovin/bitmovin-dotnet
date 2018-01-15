@@ -8,7 +8,7 @@ The full [Bitmovin API reference](https://bitmovin.com/encoding-documentation/bi
 # NuGet
 NuGet is a extension for Visual Studio which allows you to search for, install, uninstall and update external packages in your projects and solutions.
 
-NuGet comes installed with the more recent versions of Visual Studio, but you can download it from [here] (https://docs.nuget.org/consume/installing-nuget) if you don’t already have it.
+NuGet comes installed with the more recent versions of Visual Studio, but you can download it from [here](https://docs.nuget.org/consume/installing-nuget) if you don’t already have it.
 
 ## Install bitmovin-dotnet via Package Manager Console
 To install bitmovin-dotnet for .NET Framework (>= 4.0) or .NET Core, run the following command in the Package Manager Console:
