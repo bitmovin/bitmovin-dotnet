@@ -1,9 +1,8 @@
 namespace com.bitmovin.Api.Encoding
 {
-    public class Mp4 : Muxing
+    public class ProgressiveWebm : Muxing
     {
         public string Filename { get; set; }
 
-        public int? FragmentDuration { get; set; }
     }
 }

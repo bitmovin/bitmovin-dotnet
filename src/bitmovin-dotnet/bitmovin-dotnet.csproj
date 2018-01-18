@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="BaseObject.cs" />
     <Compile Include="BitmovinApi.cs" />
+    <Compile Include="Codec\VorbisAudioConfiguration.cs" />
     <Compile Include="Codec\AACAudioConfiguration.cs" />
     <Compile Include="Codec\AudioConfiguration.cs" />
     <Compile Include="Codec\CodecConfig.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Encoding\Drm\CencPlayReady.cs" />
     <Compile Include="Encoding\Drm\CencWidevine.cs" />
     <Compile Include="Encoding\Encoding.cs" />
+    <Compile Include="Encoding\ProgressiveWebm.cs" />
     <Compile Include="Encoding\SegmentedWebm.cs" />
     <Compile Include="Encoding\Fmp4.cs" />
     <Compile Include="Encoding\LiveHlsManifest.cs" />
