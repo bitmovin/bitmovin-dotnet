@@ -33,7 +33,7 @@ namespace com.bitmovin.Api.Examples
         public void StartVodEncoding()
         {
             // If you run into network errors, try uncommenting the following line.
-            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Ssl3 | System.Net.SecurityProtocolType.Tls12;
+            //System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Ssl3 | System.Net.SecurityProtocolType.Tls12;
 
             var bitmovin = new BitmovinApi(API_KEY);
 
