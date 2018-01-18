@@ -11,6 +11,7 @@ namespace com.bitmovin.Api.Container
         public AbstractResource<H265VideoConfiguration> H265 { get; private set; }
         public AbstractResource<VP9VideoConfiguration> VP9 { get; private set; }
         public AbstractResource<AACAudioConfiguration> Aac { get; private set; }
+        public AbstractResource<VorbisAudioConfiguration> Vorbis { get; private set; }
 
         public CodecContainer(RestClient client)
         {
@@ -19,6 +20,7 @@ namespace com.bitmovin.Api.Container
             this.H265 = new AbstractResource<H265VideoConfiguration>(client, ApiUrls.CodecConfigH265);
             this.VP9 = new AbstractResource<VP9VideoConfiguration>(client, ApiUrls.CodecConfigVP9);
             this.Aac = new AbstractResource<AACAudioConfiguration>(client, ApiUrls.CodecConfigAac);
+            this.Vorbis = new AbstractResource<VorbisAudioConfiguration>(client, ApiUrls.CodecConfigVorbis);
         }
     }
 }
