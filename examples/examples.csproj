@@ -66,6 +66,7 @@
     <Compile Include="H264WithPresetFast.cs" />
     <Compile Include="GetRunningEncodings.cs" />
     <Compile Include="DrmCencWidevinePlayReadyDashFairPlayHls.cs" />
+    <Compile Include="StartPerTitleEncoding.cs" />
     <Compile Include="VP9LiveEncoding.cs" />
     <Compile Include="VP9VodEncoding.cs" />
     <Compile Include="StartSimpleVodEncodingWithDashAndHls.cs" />
