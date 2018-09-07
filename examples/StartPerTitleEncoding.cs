@@ -159,16 +159,6 @@ namespace com.bitmovin.Api.Examples
             return bitmovin.Encoding.Encoding.Mp4.Create(encoding.Id, muxing);
         }
 
-        private static Stream CreateStream(InputStream inputStream, CodecConfig codecConfig, StreamMode streamMode)
-        {
-            return new Stream
-            {
-                InputStreams = new List<InputStream> { inputStream },
-                CodecConfigId = codecConfig.Id,
-                Mode = streamMode
-            };
-        }
-
         /// <summary>
         /// The encoding will be started with the per title object and the auto representations set. If the auto
         /// representation is set, stream configurations will be automatically added to the Per-Title profile. In that case
