@@ -36,8 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Users\Roland Kersche\.nuget\packages\Newtonsoft.Json\9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\src\bitmovin-dotnet\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -60,11 +60,13 @@
     <Compile Include="CreateMpegDashVodManifestFromLiveStream.cs" />
     <Compile Include="DrmCencWidevinePlayReadyDashAes128Hls.cs" />
     <Compile Include="EncodingWithFtpInputAndFtpOutput.cs" />
+    <Compile Include="EncodingWithAzureInputAndAzureOutput.cs" />
     <Compile Include="GetLiveStreamStatistics.cs" />
     <Compile Include="EncodingWithS3InputAndFtpOutput.cs" />
     <Compile Include="H264WithPresetFast.cs" />
     <Compile Include="GetRunningEncodings.cs" />
     <Compile Include="DrmCencWidevinePlayReadyDashFairPlayHls.cs" />
+    <Compile Include="StartPerTitleEncoding.cs" />
     <Compile Include="VP9LiveEncoding.cs" />
     <Compile Include="VP9VodEncoding.cs" />
     <Compile Include="StartSimpleVodEncodingWithDashAndHls.cs" />
@@ -81,6 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

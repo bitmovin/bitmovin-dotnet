@@ -24,5 +24,12 @@ namespace com.bitmovin.Api.Encoding
         
         [JsonConverter(typeof(StringEnumConverter))]
         public EncodingType? Type { get; set; }
+
+        public Encoding() { }
+
+        public Encoding(string name)
+        {
+            Name = name;
+        }
     }
 }

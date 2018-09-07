@@ -5,18 +5,6 @@ using Newtonsoft.Json.Converters;
 
 namespace com.bitmovin.Api.Encoding
 {
-    public class InputStream
-    {
-        public string InputId { get; set; }
-
-        public string InputPath { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public SelectionMode? SelectionMode { get; set; }
-
-        public int? Position { get; set; }
-    }
-
     public class Stream : BaseObject
     {
         public string Name { get; set; }
@@ -28,5 +16,8 @@ namespace com.bitmovin.Api.Encoding
         public string CodecConfigId { get; set; }
 
         public List<Output> Outputs { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public StreamMode? Mode { get; set; }
     }
 }

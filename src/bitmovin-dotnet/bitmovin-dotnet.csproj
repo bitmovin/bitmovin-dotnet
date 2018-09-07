@@ -76,6 +76,11 @@
     <Compile Include="Encoding\Drm\CencPlayReady.cs" />
     <Compile Include="Encoding\Drm\CencWidevine.cs" />
     <Compile Include="Encoding\Encoding.cs" />
+    <Compile Include="Encoding\InputStream.cs" />
+    <Compile Include="Encoding\PerTitleEncoding\AutoRepresentation.cs" />
+    <Compile Include="Encoding\PerTitleEncoding\H264PerTitleConfiguration.cs" />
+    <Compile Include="Encoding\PerTitleEncoding\PerTitle.cs" />
+    <Compile Include="Encoding\PerTitleEncoding\PerTitleConfiguration.cs" />
     <Compile Include="Encoding\SegmentedWebm.cs" />
     <Compile Include="Encoding\Fmp4.cs" />
     <Compile Include="Encoding\LiveHlsManifest.cs" />
@@ -88,6 +93,9 @@
     <Compile Include="Encoding\StartEncodingRequest.cs" />
     <Compile Include="Encoding\StartLiveEncodingRequest.cs" />
     <Compile Include="Encoding\Stream.cs" />
+    <Compile Include="Encoding\Trimming.cs" />
+    <Compile Include="Enums\EncodingMode.cs" />
+    <Compile Include="Enums\StreamMode.cs" />
     <Compile Include="Encoding\Ts.cs" />
     <Compile Include="Enums\AesMethod.cs" />
     <Compile Include="Enums\AwsCloudRegion.cs" />
@@ -133,6 +141,7 @@
     <Compile Include="Input\AnalysisDetail.cs" />
     <Compile Include="Input\AnalysisInput.cs" />
     <Compile Include="Input\AnalysisStatus.cs" />
+    <Compile Include="Input\AsperaInput.cs" />
     <Compile Include="Input\AzureInput.cs" />
     <Compile Include="Input\BaseInput.cs" />
     <Compile Include="Input\FtpInput.cs" />
