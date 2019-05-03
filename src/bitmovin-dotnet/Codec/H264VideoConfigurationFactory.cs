@@ -170,7 +170,7 @@ namespace com.bitmovin.Api.Codec
                         Cabac = true,
                         RcLookahead = 60,
                         RefFrames = 16,
-                        SubMe = H264SubMe.FULL_RD,
+                        SubMe = H264SubMe.QPRD,
                         Trellis = H264Trellis.ENABLED_ALL,
                         Partitions = new List<H264Partition> { H264Partition.ALL }
                     };

@@ -12,7 +12,6 @@
         RD_ALL,
         RD_REF_IP,
         RD_REF_ALL,
-        QPRD,
-        FULL_RD
+        QPRD
     }
 }
