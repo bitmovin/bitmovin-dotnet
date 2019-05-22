@@ -4,8 +4,6 @@
     {
         DIA,
         HEX,
-        UMH,
-        ESA,
-        TESA
+        UMH
     }
 }

@@ -154,7 +154,7 @@ namespace com.bitmovin.Api.Codec
                         Cabac = true,
                         RcLookahead = 60,
                         RefFrames = 16,
-                        SubMe = H264SubMe.QPRD,
+                        SubMe = H264SubMe.RD_REF_ALL,
                         Trellis = H264Trellis.ENABLED_ALL,
                         Partitions = new List<H264Partition> { H264Partition.ALL }
                     };
@@ -166,11 +166,11 @@ namespace com.bitmovin.Api.Codec
                         BFrames = 16,
                         MvSearchRangeMax = 24,
                         MvPredictionMode = MvPredictionMode.AUTO,
-                        MotionEstimationMethod = H264MotionEstimationMethod.TESA,
+                        MotionEstimationMethod = H264MotionEstimationMethod.UMH,
                         Cabac = true,
                         RcLookahead = 60,
                         RefFrames = 16,
-                        SubMe = H264SubMe.FULL_RD,
+                        SubMe = H264SubMe.RD_REF_ALL,
                         Trellis = H264Trellis.ENABLED_ALL,
                         Partitions = new List<H264Partition> { H264Partition.ALL }
                     };
